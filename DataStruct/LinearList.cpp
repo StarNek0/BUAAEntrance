@@ -3,7 +3,7 @@
 using namespace std;
 
 const int MaxSize = 10;
-typedef int ElemType ;
+typedef int ElemType;
 
 // p22 在长度为n的线性表A的第i个位置插入一个新元素item
 bool insert_list(ElemType A[], int& n, int i, ElemType item) {
