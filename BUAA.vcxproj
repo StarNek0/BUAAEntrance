@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DataStruct\LinearLink.cpp" />
     <ClCompile Include="DataStruct\LinearList.cpp" />
   </ItemGroup>
   <ItemGroup>
