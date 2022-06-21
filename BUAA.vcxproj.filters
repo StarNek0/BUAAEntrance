@@ -24,5 +24,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
+    <None Include=".editorconfig">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DataStruct\LinearLink.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

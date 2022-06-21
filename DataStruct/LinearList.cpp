@@ -1,4 +1,4 @@
-/*
+﻿/*
 	线性表的顺序存储结构
 */
 #include<cstdio>
@@ -199,6 +199,6 @@ void InsertItemTest() {
 }
 
 
-int main() {
-	InsertItemTest();
-}
+//int main() {
+//	InsertItemTest();
+//}
