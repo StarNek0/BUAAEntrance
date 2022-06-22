@@ -1,6 +1,8 @@
-typedef int Elemtype;
+﻿typedef int ElemType;
 
 typedef struct Node {
-	Elemtype data;
+	ElemType data;
 	struct Node* link;
-} LNode, * LinkList;
+} LinkNode, * LinkList;
+
+void Print(LinkList list);
