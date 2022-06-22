@@ -4,7 +4,7 @@
 #include<cstdio>
 #include<cassert>
 #include<iostream>
-#include "LinearLink.h"
+#include "LinearLink.hpp"
 
 using namespace std;
 
