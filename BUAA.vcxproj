@@ -27,7 +27,7 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DataStruct\LinearLink.h" />
+    <ClInclude Include="DataStruct\LinearLink.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

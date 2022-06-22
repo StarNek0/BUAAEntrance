@@ -29,7 +29,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DataStruct\LinearLink.h">
+    <ClInclude Include="DataStruct\LinearLink.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
