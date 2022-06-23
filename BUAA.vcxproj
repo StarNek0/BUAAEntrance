@@ -19,15 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DataStruct\LinearLink.cpp" />
-    <ClCompile Include="DataStruct\LinearList.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include=".editorconfig" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DataStruct\LinearLink.hpp" />
+    <ClCompile Include="DataStruct\TextBook\2_LinearLink.cpp" />
+    <ClCompile Include="DataStruct\TextBook\2_LinearList.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DataStruct\TextBook\2_LinearLink.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -1,7 +1,8 @@
 ﻿/*
-	线性表的顺序存储结构
+	教材 第2章 线性表 顺序存储结构
 */
 #include<cstdio>
+#include<cassert>
 #include<iostream>
 using namespace std;
 

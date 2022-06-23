@@ -1,10 +1,10 @@
 ﻿/*
-	线性表的链式存储结构
+	教材 第2章 线性表 链式存储结构
 */
 #include<cstdio>
 #include<cassert>
 #include<iostream>
-#include "LinearLink.hpp"
+#include "2_LinearLink.hpp"
 
 using namespace std;
 
@@ -415,6 +415,14 @@ void LinkSortTest() {
 	LinkSort(A, 5);
 	for (int i = 0; i < 5; i++)
 		cout << A[i] << " ";
+}
+
+// <数据结构教程>p44 例2.4 将最大的节点移到末尾
+void MoveMaxNodeToTail() {
+
+}
+void MoveMaxNodeToTailTest() {
+
 }
 
 int main() {
