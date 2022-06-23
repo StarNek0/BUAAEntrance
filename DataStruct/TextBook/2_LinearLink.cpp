@@ -188,7 +188,7 @@ void InsertLink5(LinkList& list, ElemType item) {
 	else {
 		LinkList p = list;
 		while (p->next != NULL) {
-			if (item > p->data && item <=p->next->data)
+			if (item > p->data && item <= p->next->data)
 				break;
 			else
 				p = p->next;
@@ -418,13 +418,64 @@ void LinkSortTest() {
 }
 
 // <数据结构教程>p44 例2.4 将最大的节点移到末尾
-void MoveMaxNodeToTail() {
+void MoveMaxNodeToTail(LinkList& list) {
+	if (list == NULL)
+		return;
+	if (list->next == NULL)
+		return;
 
+	// 指向最大节点的前一节点的指针
+	LinkList frontptr = (LinkList)malloc(sizeof(LinkNode));
+
+	// 指向最大节点的指针
+	LinkList maxptr = (LinkList)malloc(sizeof(LinkNode));
+	maxptr->next = list;
+
+	LinkList p = list->next;
+	for (;p->next != NULL; p = p->next) {
+		if (p->next->data > maxptr->next->data) {
+			frontptr->next = p;
+			maxptr->next = p->next;
+		}
+	}
+	// 此时p代表最后一个节点
+
+	if (maxptr->next == p) // 头结点是最大节点
+		return;
+	else if (maxptr->next == list) { // 尾结点是最大节点
+		LinkList tmp = list->next;
+		p->next = list;
+		list->next = NULL;
+		list = tmp;
+	}
+	else {
+		p->next = maxptr->next;
+		frontptr->next->next = maxptr->next->next;
+		maxptr->next->next = NULL;
+	}
 }
 void MoveMaxNodeToTailTest() {
+	int A[5] = { 1,2,3,4,5 };
+	LinkList lista = CreateListByArray(A, 5);
+	MoveMaxNodeToTail(lista);
+	Print(lista);
 
+	int B[5] = { 5, 1, 2, 3, 4 };
+	LinkList listb = CreateListByArray(B, 5);
+	MoveMaxNodeToTail(listb);
+	Print(listb);
+
+	int C[5] = { 5 };
+	LinkList listc = CreateListByArray(C, 1);
+	MoveMaxNodeToTail(listc);
+	Print(listc);
+
+	int D[5] = { 1, 2, 5, 3, 4 };
+	LinkList listd = CreateListByArray(D, 5);
+	MoveMaxNodeToTail(listd);
+	Print(listd);
 }
 
 int main() {
-	LinkSortTest();
+	MoveMaxNodeToTailTest();
 }
