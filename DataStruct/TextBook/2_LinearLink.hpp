@@ -6,3 +6,4 @@ typedef struct Node {
 } LinkNode, * LinkList;
 
 void Print(LinkList list);
+LinkList CreateListByArray(ElemType A[], int n);
