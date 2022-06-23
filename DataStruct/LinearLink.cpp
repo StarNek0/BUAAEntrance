@@ -178,23 +178,33 @@ void InsertLink4Test() {
 
 // <数据结构教程>p37 在非递减链表中追加item
 void InsertLink5(LinkList& list, ElemType item) {
-	LinkList p = list;
-	while (p->next != NULL) {
-		if (item > p->data)
-			break;
-		else
-			p = p->next;
-	}
-
 	LinkList newptr = (LinkList)malloc(sizeof(LinkNode));
 	newptr->data = item;
-	newptr->next = p->next;
-	p->next = newptr;
+
+	if (list == NULL || item < list->data) {
+		newptr->next = list;
+		list = newptr;
+	}
+	else {
+		LinkList p = list;
+		while (p->next != NULL) {
+			if (item > p->data && item <=p->next->data)
+				break;
+			else
+				p = p->next;
+		}
+
+		newptr->next = p->next;
+		p->next = newptr;
+	}
 }
 void InsertLink5Test() {
-	LinkList list = Create(3);
+	ElemType A[5] = { 1,2,3,5 };
+	LinkList list = CreateListByArray(A, 4);
 	Print(list);
-	InsertLink5(list, 2);
+	InsertLink5(list, 4);
+	Print(list);
+	InsertLink5(list, 5);
 	Print(list);
 }
 
@@ -389,6 +399,24 @@ void CopyTest() {
 	Print(listb);
 }
 
+// <数据结构教程>p44 利用链表排序
+void LinkSort(ElemType A[], int n) {
+	LinkList  list = NULL;
+	for (int i = 0; i < n; i++)
+	{
+		InsertLink5(list, A[i]);
+	}
+	int i = 0;
+	for (LinkList p = list; p != NULL; p = p->next)
+		A[i++] = p->data;
+}
+void LinkSortTest() {
+	ElemType A[5] = { 5, 2, 3, 1, 4 };
+	LinkSort(A, 5);
+	for (int i = 0; i < 5; i++)
+		cout << A[i] << " ";
+}
+
 int main() {
-	MergeListTest();
+	LinkSortTest();
 }
