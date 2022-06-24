@@ -23,11 +23,11 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DataStruct\TextBook\2_LinearLink.cpp" />
+    <ClCompile Include="DataStruct\TextBook\2_LinearLinkList.cpp" />
     <ClCompile Include="DataStruct\TextBook\2_LinearList.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DataStruct\TextBook\2_LinearLink.hpp" />
+    <ClInclude Include="DataStruct\TextBook\2_LinearLinkList.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

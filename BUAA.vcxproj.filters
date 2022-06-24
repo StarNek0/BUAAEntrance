@@ -21,7 +21,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DataStruct\TextBook\2_LinearLink.cpp">
+    <ClCompile Include="DataStruct\TextBook\2_LinearLinkList.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="DataStruct\TextBook\2_LinearList.cpp">
@@ -29,7 +29,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DataStruct\TextBook\2_LinearLink.hpp">
+    <ClInclude Include="DataStruct\TextBook\2_LinearLinkList.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

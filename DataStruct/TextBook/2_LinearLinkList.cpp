@@ -4,14 +4,21 @@
 #include<cstdio>
 #include<cassert>
 #include<iostream>
-#include "2_LinearLink.hpp"
+#include "2_LinearLinkList.hpp"
 
 using namespace std;
 
 void Print(LinkList list) {
+	int n = 0;
 	cout << list << ": ";
-	for (LinkList lnode = list; lnode != NULL; lnode = lnode->next) {
-		cout << lnode->data << " -> ";
+	for (LinkList p = list; p != nullptr; p = p->next) {
+		if (p == list && n != 0) {
+			cout << "[HeadNode(" << p->data <<")]" << endl;
+			return;
+		}
+		n++;
+		cout << p->data << " -> ";
+
 	}
 	cout << "NULL" << endl;
 }
@@ -432,7 +439,7 @@ void MoveMaxNodeToTail(LinkList& list) {
 	maxptr->next = list;
 
 	LinkList p = list->next;
-	for (;p->next != NULL; p = p->next) {
+	for (; p->next != NULL; p = p->next) {
 		if (p->next->data > maxptr->next->data) {
 			frontptr->next = p;
 			maxptr->next = p->next;
@@ -475,7 +482,82 @@ void MoveMaxNodeToTailTest() {
 	MoveMaxNodeToTail(listd);
 	Print(listd);
 }
+// <数据结构教程>p46 循环链表查找
+LinkList SearchKey(LinkList list, ElemType item) {
+	if (list == NULL || list->data == item)
+		return list;
+
+	LinkList p = list;
+	p = list->next;
+	while (p != list) {
+		if (p->data == item)
+			return p;
+		p = p->next;
+	}
+	return NULL;
+}
+void SearchKeyTest() {
+	int A[3] = { 1,2,3 };
+	LinkList lista = CreateListByArray(A, 3);
+	lista->next->next->next = lista;
+	LinkList res = SearchKey(lista, 1);
+	cout << res << endl;
+}
+
+/*
+	<数据结构教程>p46 约瑟夫问题
+	共有 n 个人, 从第 k 个人开始报数, 数到 m 的人出列
+
+	在罗马人占领乔塔帕特后，39 个犹太人与Josephus及他的朋友躲到一个洞中，39个犹太人决定宁愿死也不要被人抓到，
+	于是决定了一个自杀方式，41个人排成一个圆圈，由第1个人开始报数，每报数到第3人该人就必须自杀，
+	然后再由下一个重新从1开始报数，直到所有人都自杀身亡为止。
+	然而Josephus 和他的朋友并不想遵从，Josephus要他的朋友先假装遵从，
+	他将朋友与自己安排在第16个与第31个位置，于是逃过了这场死亡游戏。
+*/
+void Josephus(int n, int m, int k) {
+	// 创建循环链表
+	LinkList list = NULL, tail = NULL;
+	for (int i = n; i >= 1; i--) {
+		LinkList newptr = (LinkList)malloc(sizeof(LinkNode));
+		if (newptr == NULL)
+			throw "申请内存失败";
+		newptr->data = i;
+		newptr->next = NULL;
+		//newptr->next = NULL;
+		if (list == NULL) {
+			tail = newptr;
+			list = newptr;
+		}
+		else {
+			newptr->next = list;
+			list = newptr;
+		}
+	}
+	if (tail == NULL)
+		return;
+	tail->next = list;
+	Print(list);
+
+	// 设置从k开始
+	LinkList p = list;
+	for (int i = 1; i < k; i++)
+		p = p->next;
+
+	// 不断删除节点
+	while (p->next != p) {
+		for (int i = 1; i < m-1; i++)
+			p = p->next;
+		cout << p->next->data << endl;
+		p->next = p->next->next;
+		p = p->next; // 注意这一步
+		//Print(p);
+	}
+}
+void JosephusTest() {
+	Josephus(8, 4, 3);
+	Josephus(41, 3, 1);
+}
 
 int main() {
-	MoveMaxNodeToTailTest();
+	JosephusTest();
 }
