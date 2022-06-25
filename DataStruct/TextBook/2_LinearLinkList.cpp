@@ -721,6 +721,20 @@ void DeleteDTest() {
 	Print(a);
 }
 
+// <数据结构教程>p53
+PLinkList Attach(int coef, int exp, PLinkList r) {
+	PLinkList newptr = (PLinkList)malloc((sizeof(PLinkNode)));
+	newptr->coef = coef;
+	newptr->exp = exp;
+	newptr->next = r;
+	return newptr;
+}
+// TODO: <数据结构教程>p53
+PLinkList PAdd(PLinkList a, PLinkList b) {
+
+}
+// TODO: <数据结构教程>p54 文本文件最后n行
+
 int main() {
 	DeleteDTest();
 }

@@ -29,3 +29,9 @@ DLinkList CreateDListByArray(ElemType A[], int n);
 // 创建双向循环链表
 DLinkList CreateDListByArray(ElemType A[], int n, bool loop, bool head);
 
+// 多项式链表
+typedef struct PNode {
+	int coef; // 系数
+	int exp; // 指数
+	struct PNode* next;
+} PLinkNode, *PLinkList;
