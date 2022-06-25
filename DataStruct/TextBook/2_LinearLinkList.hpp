@@ -8,11 +8,24 @@ typedef struct Node {
 
 void Print(LinkList list);
 
+// 创建单向链表
 LinkList CreateListByArray(ElemType A[], int n);
 
+// 创建循环链表
+LinkList CreateListByArray(ElemType A[], int n, bool loop);
+
 // 双向链表
-struct DNode {
+typedef struct DNode {
 	ElemType data;
 	struct DNode* left;
 	struct DNode* right;
 } DLinkNode, * DLinkList;
+
+void Print(DLinkList list);
+
+// 创建双向链表
+DLinkList CreateDListByArray(ElemType A[], int n);
+
+// 创建双向循环链表
+DLinkList CreateDListByArray(ElemType A[], int n, bool loop);
+

@@ -23,7 +23,13 @@ void Print(LinkList list) {
 	cout << "NULL" << endl;
 }
 
+// 创建单向链表
 LinkList CreateListByArray(ElemType A[], int n) {
+	return CreateListByArray(A, n, false);
+}
+
+// 创建循环链表
+LinkList CreateListByArray(ElemType A[], int n, bool loop) {
 	LinkList list = (LinkList)malloc(sizeof(LinkNode));
 	LinkList p = list;
 	if (list == NULL)
@@ -44,7 +50,60 @@ LinkList CreateListByArray(ElemType A[], int n) {
 		p->next = newptr;
 		p = p->next;
 	}
+	if (loop)
+		p->next = list;
 
+	return list;
+}
+
+void Print(DLinkList list) {
+	int n = 0;
+	cout << list << ": ";
+	for (DLinkList p = list; p != nullptr; p = p->right) {
+		if (p == list && n != 0) {
+			cout << "[HeadNode(" << p->data << ")]" << endl;
+			return;
+		}
+		n++;
+		cout << p->data << " -> ";
+
+	}
+	cout << "NULL" << endl;
+}
+
+// 创建双向链表
+DLinkList CreateDListByArray(ElemType A[], int n) {
+	return CreateDListByArray(A, n, false);
+}
+
+// 创建双向循环链表
+DLinkList CreateDListByArray(ElemType A[], int n, bool loop) {
+	DLinkList list = (DLinkList)malloc(sizeof(DLinkNode));
+	DLinkList p = list;
+	if (list == NULL)
+		return list;
+
+	for (int i = 0; i < n; i++) {
+		if (i == 0) {
+			p->data = A[i];
+			p->left = NULL;
+			p->right = NULL;
+			continue;
+		}
+		DLinkList newptr = (DLinkList)malloc(sizeof(DLinkNode));
+		if (newptr == NULL)
+			break;
+		newptr->data = A[i];
+		newptr->left = p;
+		newptr->right = NULL;
+
+		p->right = newptr;
+		p = p->right;
+	}
+	if (loop) {
+		p->right = list;
+		list->left = p;
+	}
 	return list;
 }
 
