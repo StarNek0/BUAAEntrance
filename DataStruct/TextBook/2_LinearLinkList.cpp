@@ -9,11 +9,14 @@
 using namespace std;
 
 void Print(LinkList list) {
+	if (list == NULL)
+		return;
+
 	int n = 0;
 	cout << list << ": ";
 	for (LinkList p = list; p != nullptr; p = p->next) {
 		if (p == list && n != 0) {
-			cout << "[HeadNode(" << p->data <<")]" << endl;
+			cout << "[FirstNode(" << p->data << ")]" << endl;
 			return;
 		}
 		n++;
@@ -57,15 +60,34 @@ LinkList CreateListByArray(ElemType A[], int n, bool loop) {
 }
 
 void Print(DLinkList list) {
-	int n = 0;
+	if (list == NULL)
+		return;
+
 	cout << list << ": ";
-	for (DLinkList p = list; p != nullptr; p = p->right) {
+	// 只有头结点
+	if (list->left == NULL && list->right == NULL) {
+		cout << "[HeadNode] -> NULL" << endl;
+		return;
+	}
+
+	// 如果有头结点, 进到数据节点
+	if (list->right->left != list) {
+		list = list->right;
+		cout << "[HeadNode] <-> ";
+	}
+
+	int n = 0;
+	for (DLinkList p = list; p != NULL; p = p->right) {
 		if (p == list && n != 0) {
-			cout << "[HeadNode(" << p->data << ")]" << endl;
+			cout << "[FirstNode(" << p->data << ")]" << endl;
+			return;
+		}
+		if (p->right->left != p->left->right) {
+			cout << endl << "异常: 节点关系不正确";
 			return;
 		}
 		n++;
-		cout << p->data << " -> ";
+		cout << p->data << " <-> ";
 
 	}
 	cout << "NULL" << endl;
@@ -73,11 +95,11 @@ void Print(DLinkList list) {
 
 // 创建双向链表
 DLinkList CreateDListByArray(ElemType A[], int n) {
-	return CreateDListByArray(A, n, false);
+	return CreateDListByArray(A, n, false, false);
 }
 
 // 创建双向循环链表
-DLinkList CreateDListByArray(ElemType A[], int n, bool loop) {
+DLinkList CreateDListByArray(ElemType A[], int n, bool loop, bool head) {
 	DLinkList list = (DLinkList)malloc(sizeof(DLinkNode));
 	DLinkList p = list;
 	if (list == NULL)
@@ -104,6 +126,15 @@ DLinkList CreateDListByArray(ElemType A[], int n, bool loop) {
 		p->right = list;
 		list->left = p;
 	}
+	if (head) {
+		DLinkList head = (DLinkList)malloc(sizeof(DLinkNode));
+		if (head == NULL)
+			return head;
+		head->left = NULL;
+		head->right = list;
+		return head;
+	}
+
 	return list;
 }
 
@@ -604,7 +635,7 @@ void Josephus(int n, int m, int k) {
 
 	// 不断删除节点
 	while (p->next != p) {
-		for (int i = 1; i < m-1; i++)
+		for (int i = 1; i < m - 1; i++)
 			p = p->next;
 		cout << p->next->data << endl;
 		p->next = p->next->next;
@@ -617,6 +648,79 @@ void JosephusTest() {
 	Josephus(41, 3, 1);
 }
 
+// <数据结构教程>p49 带头结点的双向循环链表第一个data=x的节点右边追加一个item
+bool InsertD(DLinkList list, ElemType x, ElemType item) {
+	if (list->right != list->left) // 判断是否有头结点
+		list = list->right;
+	DLinkList p = list;
+	int n = 0; // 代表循环的次数, 如果p再次循环到了同一节点的时候, 用n非零来标识
+	while (true) {
+		if (p->data == x)
+			break;
+		if (p == list && n != 0)
+			return false;
+		p = p->right;
+		n++;
+	}
+
+	DLinkList newptr = (DLinkList)malloc(sizeof(DLinkNode));
+	newptr->data = item;
+	newptr->left = p;
+	newptr->right = p->right;
+	newptr->right->left = newptr;
+	p->right = newptr;
+	return true;
+}
+void InsertDTest() {
+	int A[5] = { 1,2,3 };
+	DLinkList a = CreateDListByArray(A, 3, true, true);
+	Print(a);
+	InsertD(a, 2, 999);
+	Print(a);
+}
+
+// <数据结构教程>p50 有头节点的双向循环链表删除第1个data=x的节点
+bool DeleteD(DLinkList list, ElemType x) {
+	DLinkList head = NULL;
+	if (list->right != list->left) { // 判断是否有头结点
+		head = list;
+		list = list->right;
+	}
+	DLinkList p = list;
+	int n = 0; // 代表循环的次数, 如果p再次循环到了同一节点的时候, 用n非零来标识
+	while (true) {
+		if (p->data == x)
+			break;
+		if (p == list && n != 0)
+			return false;
+		p = p->right;
+		n++;
+	}
+	if (p->right == p) { // 如果仅剩1个节点
+		if (head && head->right == p) {
+			head->right = NULL;
+		}
+		free(p);
+		return true;
+	}
+
+	p->left->right = p->right;
+	p->right->left = p->left;
+	free(p);
+	return true;
+}
+void DeleteDTest() {
+	int A[5] = { 1,2,3 };
+	DLinkList a = CreateDListByArray(A, 3, true, true);
+	Print(a);
+	DeleteD(a, 2);
+	Print(a);
+	DeleteD(a, 3);
+	Print(a);
+	DeleteD(a, 1);
+	Print(a);
+}
+
 int main() {
-	JosephusTest();
+	DeleteDTest();
 }

@@ -27,5 +27,5 @@ void Print(DLinkList list);
 DLinkList CreateDListByArray(ElemType A[], int n);
 
 // 创建双向循环链表
-DLinkList CreateDListByArray(ElemType A[], int n, bool loop);
+DLinkList CreateDListByArray(ElemType A[], int n, bool loop, bool head);
 
