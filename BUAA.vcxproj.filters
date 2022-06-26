@@ -27,9 +27,15 @@
     <ClCompile Include="DataStruct\TextBook\2_LinearList.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="DataStruct\TextBook\3_Array.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataStruct\TextBook\2_LinearLinkList.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStruct\TextBook\3_Array.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -731,10 +731,10 @@ PLinkList Attach(int coef, int exp, PLinkList r) {
 }
 // TODO: <数据结构教程>p53
 PLinkList PAdd(PLinkList a, PLinkList b) {
-
+	return NULL;
 }
 // TODO: <数据结构教程>p54 文本文件最后n行
 
-int main() {
-	DeleteDTest();
-}
+//int main() {
+//	DeleteDTest();
+//}
