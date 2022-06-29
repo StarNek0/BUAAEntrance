@@ -170,6 +170,76 @@ void MatrixAddTest() {
 	cout << endl;
 }
 
+// <数据结构教程>p72 稀疏矩阵的相乘
+void MatrixMult(int A[][3], int B[][3], int C[][3]) {
+	int k = 0;
+	for (int i = 1; i <= A[0][0]; i++) {
+		for (int j = 1; j <= B[0][1]; j++) {
+			int sum = 0;
+			int p = 1;
+			while (p <= A[0][2]) {
+				if (A[p][0] == i) {
+					int q = 1;
+					while (q <= B[0][2]) {
+						if (B[q][1] == j && A[p][1] == B[q][0]) {
+							sum += A[p][2] * B[q][2];
+							break;
+						}
+						q++;
+					}
+					// p++; // 教材这里写错了应该放在if外面, 否则p永不更新, 死循环
+				}
+				p++; 
+			}
+			if (sum != 0) {
+				k++;
+				C[k][0] = i;
+				C[k][1] = j;
+				C[k][2] = sum;
+			}
+		}
+	}
+	C[0][0] = A[0][0];
+	C[0][1] = B[0][1];
+	C[0][2] = k;
+}
+void MatrixMultTest() {
+	ElemType TA[][3] = {
+	{3,4,5},
+	{1,2,-2},
+	{1,3,1},
+	{2,4,4},
+	{3,1,3},
+	{3,3,5},
+	};
+	ElemType TB[][3] = {
+	{4,3,5},
+	{1,2,1},
+	{2,1,2},
+	{2,3,3},
+	{3,1,4},
+	{3,3,1},
+	};
+	ElemType TC[MaxN][3];
+
+	MatrixMult(TA, TB, TC);
+
+	PrintCompress(TA);
+	cout << endl;
+	PrintCompress(TB);
+	cout << endl;
+	PrintCompress(TC);
+	cout << endl;
+
+	Print(Decompress(TA), TA[0][0], TA[0][1]);
+	cout << endl;
+	Print(Decompress(TB), TB[0][0], TB[0][1]);
+	cout << endl;
+	Print(Decompress(TC), TC[0][0], TC[0][1]);
+	cout << endl;
+}
+
+
 int main() {
-	MatrixAddTest();
+	MatrixMultTest();
 }
