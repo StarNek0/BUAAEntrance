@@ -31,6 +31,7 @@
   <ItemGroup>
     <ClInclude Include="DataStruct\TextBook\2_LinearLinkList.hpp" />
     <ClInclude Include="DataStruct\TextBook\3_Array.hpp" />
+    <ClInclude Include="DataStruct\TextBook\4_Stack.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -1,4 +1,5 @@
-﻿typedef int ElemType;
+﻿#pragma once
+typedef int ElemType;
 
 // 链表
 typedef struct Node {

@@ -1,14 +1,7 @@
 ﻿#/*
 	教材 第4章 堆栈和队列 栈
 */
-#include<cstdio>
-#include<iostream>
-
-using namespace std;
-
-
-typedef int ElemType;
-const int M = 1000;
+#include "4_Stack.hpp"
 
 // <数据结构教程>p87 栈的一系列操作
 void Init(int& top) {
@@ -82,6 +75,39 @@ void PushPop2Test() {
 	Pop2(stack, top, 1, item);
 	cout << top[0] << " " << top[1] << endl;
 }
+
+// <数据结构教程>p93 栈的链式存储的一系列操作
+void InitLink(LinkNode& top) {
+	top = NULL;
+}
+bool EmptyLink(LinkNode top) {
+	return top == NULL;
+}
+bool GetTopLink(LinkNode top, ElemType& item) {
+	if (EmptyLink(top))
+		return false;
+	item = top->data;
+	return true;
+}
+bool PushLink(LinkNode& top, ElemType item) {
+	LinkNode newptr = (LinkNode)malloc(sizeof(Node));
+	if (!newptr)
+		return false;
+	newptr->data = item;
+	newptr->next = top;
+	top = newptr;
+	return true;
+}
+bool PopLink(LinkNode& top, ElemType& item) {
+	if (EmptyLink(top))
+		return false;
+	LinkNode p = top;
+	item = top->data;
+	top = top->next;
+	free(p);
+	return true;
+}
+
 int main() {
 	PushPop2Test();
 }

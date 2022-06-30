@@ -41,5 +41,8 @@
     <ClInclude Include="DataStruct\TextBook\3_Array.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="DataStruct\TextBook\4_Stack.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
