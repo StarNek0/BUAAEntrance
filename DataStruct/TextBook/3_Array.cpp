@@ -243,6 +243,6 @@ void MatrixMultTest() {
 
 // TODO: <数据结构教程>p80 魔方
 
-int main() {
-	MatrixMultTest();
-}
+//int main() {
+//	MatrixMultTest();
+//}

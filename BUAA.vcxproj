@@ -26,6 +26,7 @@
     <ClCompile Include="DataStruct\TextBook\2_LinearLinkList.cpp" />
     <ClCompile Include="DataStruct\TextBook\2_LinearList.cpp" />
     <ClCompile Include="DataStruct\TextBook\3_Array.cpp" />
+    <ClCompile Include="DataStruct\TextBook\4_Stack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataStruct\TextBook\2_LinearLinkList.hpp" />
