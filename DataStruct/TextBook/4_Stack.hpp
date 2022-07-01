@@ -11,4 +11,4 @@ const int M = 1000;
 typedef struct node {
 	ElemType data;
 	struct node* next;
-}Node, *LinkNode;
+}Node, * LinkNode;
