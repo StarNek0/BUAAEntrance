@@ -187,6 +187,14 @@ void ConversionTest() {
 	ConversionLink(391);
 }
 
+// <数据结构教程>p99 递归
+int F(int m, int n) {
+	if (m * n == 0)
+		return m + n + 1;
+	else
+		return F(m - 1, F(m, n - 1));
+}
+
 int main() {
 	ConversionTest();
 }
