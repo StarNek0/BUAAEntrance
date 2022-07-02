@@ -161,6 +161,32 @@ void TestIsBrashMatch() {
 	}
 }
 
+// <数据结构教程>p95 数制转换
+void Conversion(int num) {
+	int stack[M] = {}, top = -1;
+	while (num != 0) {
+		stack[++top] = num % 8;
+		num = num / 8;
+	}
+	while (top >= 0)
+		cout << stack[top--];
+}
+void ConversionLink(int num) {
+	LinkNode stack = NULL, top = NULL;
+	while (num != 0) {
+		LinkNode newptr = (LinkNode)malloc(sizeof(Node));
+		newptr->data = num % 8;
+		newptr->next = stack;
+		stack = newptr;
+		num = num / 8;
+	}
+	for (LinkNode p = stack; p != NULL; p = p->next)
+		cout << p->data;
+}
+void ConversionTest() {
+	ConversionLink(391);
+}
+
 int main() {
-	TestIsBrashMatch();
+	ConversionTest();
 }
