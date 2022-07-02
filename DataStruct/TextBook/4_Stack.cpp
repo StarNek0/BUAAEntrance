@@ -77,37 +77,88 @@ void PushPop2Test() {
 }
 
 // <数据结构教程>p93 栈的链式存储的一系列操作
-void InitLink(LinkNode& top) {
-	top = NULL;
+namespace LinkStack {
+	void Init(LinkNode& top) {
+		top = NULL;
+	}
+	bool Empty(LinkNode top) {
+		return top == NULL;
+	}
+	bool GetTop(LinkNode top, ElemType& item) {
+		if (Empty(top))
+			return false;
+		item = top->data;
+		return true;
+	}
+	bool Push(LinkNode& top, ElemType item) {
+		LinkNode newptr = (LinkNode)malloc(sizeof(Node));
+		if (!newptr)
+			return false;
+		newptr->data = item;
+		newptr->next = top;
+		top = newptr;
+		return true;
+	}
+	bool Pop(LinkNode& top, ElemType& item) {
+		if (Empty(top))
+			return false;
+		LinkNode p = top;
+		item = top->data;
+		top = top->next;
+		free(p);
+		return true;
+	}
+
 }
-bool EmptyLink(LinkNode top) {
-	return top == NULL;
-}
-bool GetTopLink(LinkNode top, ElemType& item) {
-	if (EmptyLink(top))
-		return false;
-	item = top->data;
+
+// <数据结构教程>p95 4.4.1括号匹配
+bool IsBrashMatch(const char A[]) {
+	LinkNode top;
+	LinkStack::Init(top);
+	for (int i = 0; A[i] != '\0'; i++) {
+		if (A[i] == '{' || A[i] == '(') {
+			LinkStack::Push(top, A[i]);
+		}
+		else if (A[i] == '}')
+		{
+			if (LinkStack::Empty(top))
+				return false;
+			else
+			{
+				ElemType item;
+				LinkStack::Pop(top, item);
+				if (item != '{')
+					return false;
+			}
+		}
+		else if (A[i] == ')')
+		{
+			if (LinkStack::Empty(top))
+				return false;
+			{
+				ElemType item;
+				LinkStack::Pop(top, item);
+				if (item != '(')
+					return false;
+			}
+		}
+	}
 	return true;
 }
-bool PushLink(LinkNode& top, ElemType item) {
-	LinkNode newptr = (LinkNode)malloc(sizeof(Node));
-	if (!newptr)
-		return false;
-	newptr->data = item;
-	newptr->next = top;
-	top = newptr;
-	return true;
-}
-bool PopLink(LinkNode& top, ElemType& item) {
-	if (EmptyLink(top))
-		return false;
-	LinkNode p = top;
-	item = top->data;
-	top = top->next;
-	free(p);
-	return true;
+void TestIsBrashMatch() {
+	vector<string> As;
+	As.push_back("{}");
+	As.push_back("()");
+	As.push_back("{()}");
+	As.push_back("{(})");
+	
+	for (string a : As) {
+		cout << "Case: " << a << endl;
+		cout << "IsValid: " << IsBrashMatch(a.c_str()) << endl;
+		cout << "---------------------------" << endl;
+	}
 }
 
 int main() {
-	PushPop2Test();
+	TestIsBrashMatch();
 }
