@@ -195,6 +195,25 @@ int F(int m, int n) {
 		return F(m - 1, F(m, n - 1));
 }
 
+// <数据结构教程>p100 递归的递推写法
+int Reccurresive(int m, int n) {
+	int stack[M] = {}, top = -1;
+	while (top >= -1) {
+		if (m * n != 0) {
+			stack[++top] = m - 1;
+			n--;
+		}
+		else
+		{
+			n = m + n + 1;
+			if (top >= 0)
+				m = stack[top];
+			top--;
+		}
+	}
+	return n;
+}
+
 int main() {
 	ConversionTest();
 }
