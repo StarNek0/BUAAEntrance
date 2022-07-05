@@ -85,3 +85,11 @@ bool DelLinkQ(LinkNode& front, int& item) {
 	free(p);
 	return true;
 }
+
+void DestoryQ(LinkNode& front, LinkNode& rear) {
+	while (front) {
+		rear = front->next;
+		free(front);
+		front = rear;
+	}
+}
