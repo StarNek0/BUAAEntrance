@@ -7,6 +7,7 @@
 using namespace std;
 
 const int MaxTreeD = 100;
+typedef char datatype;
 
 // 定长多重链表
 typedef struct dnode {
@@ -28,3 +29,9 @@ typedef struct tnode {
 	int data;
 	struct tnode* child, * parent, * brother;
 }TTree;
+
+typedef struct bnode {
+	datatype data;
+	struct bnode* lchild, * rchild;
+}BinNode, * BinTree;
+

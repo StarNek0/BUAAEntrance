@@ -215,11 +215,11 @@ int Reccurresive(int m, int n) {
 }
 
 // TODO: <数据结构教程>p101 表达式
-int Eval(const char E[]){}
-int Postfix(const char E[]) {}
+int Eval(const char E[]) { return 0; }
+int Postfix(const char E[]) { return 0; }
 
 // TODO: <数据结构教程>p104 迷宫深搜
-int Maxepath(int Maze[][100], int m, int n){}
+int Maxepath(int Maze[][100], int m, int n) { return 0; }
 
 //int main() {
 //	ConversionTest();
