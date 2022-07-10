@@ -96,6 +96,7 @@ void PrintTree(BinTree T, int h) {
     printf("\n");
 }
 
+// <数据结构教程>p160 从字符串创建
 BinTree CreateBinTree() {
 	BinTree stack[100] = {}, p = NULL, T = NULL;
 	char ch = 0;
@@ -135,8 +136,59 @@ BinTree CreateBinTree() {
 	}
 }
 void CreateBinTreeTest() {
-	BinTree b = CreateBinTree();// A(B(D, E(G)), C(F(, H)))@
+	BinTree b = CreateBinTree();//输入: A(B(D, E(G)), C(F(, H)))@
     PrintTree(b, 4);
+}
+
+// <数据结构教程>p161 从数组创建树
+BinTree BuildBinTree(int BT[]) {
+
+    BinTree T = (BinTree)malloc(sizeof(BinNode));
+    T->data = BT[0];
+    T->lchild = NULL;
+    T->rchild = NULL;
+
+    BinTree PTR[100] = { T };
+
+    for (int i = 1; i < 100; i++) {
+        if (BT[i] != 0) {
+            PTR[i] = (BinTree)malloc(sizeof(BinNode));
+            T->data = BT[i];
+            T->lchild = NULL;
+            T->rchild = NULL;
+
+            int j = (i - 1) / 2;
+            if (i - 2 * j - 1 == 0)
+                PTR[j]->lchild = PTR[i];
+            else
+                PTR[j]->rchild = PTR[i];
+        }
+    }
+}
+
+// <数据结构教程>p162 递归求二叉树叶节点数目
+int CountLeaf(BinTree t) {
+    if (t == NULL)
+        return 0;
+    if (t->lchild == NULL && t->rchild == NULL)
+        return 1;
+    return CountLeaf(t->lchild) + CountLeaf(t->rchild);
+}
+
+// <数据结构教程>p162 递归求二叉树深度
+int BinTreeDepth(BinTree t) {
+    int leftdep = 0, rightdep = 0;
+    if (t == NULL)
+        return 0;
+    else
+    {
+        leftdep = BinTreeDepth(t->lchild);
+        rightdep = BinTreeDepth(t->rchild);
+        if (leftdep > rightdep)
+            return leftdep + 1;
+        else
+            return rightdep + 1;
+    }
 }
 
 int main() {
