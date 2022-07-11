@@ -19,6 +19,7 @@
     <None Include=".editorconfig">
       <Filter>资源文件</Filter>
     </None>
+    <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DataStruct\TextBook\2_LinearLinkList.cpp">
