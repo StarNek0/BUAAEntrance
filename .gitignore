@@ -57,3 +57,5 @@ bld/
 
 # Visual Studio 2019 cache/options directory
 .vs/
+
+.idea/

@@ -97,13 +97,12 @@ void PrintTree(BinTree T, int h) {
 }
 
 // <数据结构教程>p160 从字符串创建
-BinTree CreateBinTree() {
+BinTree CreateBinTree(string s) {
 	BinTree stack[100] = {}, p = NULL, T = NULL;
 	char ch = 0;
 	int flag = 0, top = -1;
-	while (true)
+	for(char ch : s)
 	{
-		scanf_s("%c", &ch);
 		switch (ch)
 		{
 		case '@':
@@ -136,8 +135,8 @@ BinTree CreateBinTree() {
 	}
 }
 void CreateBinTreeTest() {
-	BinTree b = CreateBinTree();//输入: A(B(D, E(G)), C(F(, H)))@
-    PrintTree(b, 4);
+	BinTree t= CreateBinTree("A(B(D, E(G)), C(F(, H)))@");
+    PrintTree(t, 4);
 }
 
 // <数据结构教程>p161 从数组创建树
@@ -164,6 +163,7 @@ BinTree BuildBinTree(int BT[]) {
                 PTR[j]->rchild = PTR[i];
         }
     }
+    return T;
 }
 
 // <数据结构教程>p162 递归求二叉树叶节点数目
@@ -191,7 +191,41 @@ int BinTreeDepth(BinTree t) {
     }
 }
 
+// <数据结构教程>p163 二叉树的三种遍历方式
+void PreOrder(BinTree t) {
+    if (t != NULL) {
+        cout << t->data << " ";
+        PreOrder(t->lchild);
+        PreOrder(t->rchild);
+    }
+}
+void InOrder(BinTree t) {
+    if (t != NULL) {
+        InOrder(t->lchild);
+        cout << t->data << " ";
+        InOrder(t->rchild);
+    }
+}
+void PostOrder(BinTree t) {
+    if (t != NULL) {
+        PostOrder(t->lchild);
+        PostOrder(t->rchild);
+        cout << t->data << " ";
+    }
+}
+void OrderTest() {
+    BinTree t = CreateBinTree("A(B(D, E(G)), C(F(, H)))@");
+    PrintTree(t, 4);
+    cout << endl;
+    PreOrder(t);
+    cout << endl;
+    InOrder(t);
+    cout << endl;
+    PostOrder(t);
+    cout << endl;
+}
+
 int main() {
-	CreateBinTreeTest();
+    OrderTest();
 }
 
