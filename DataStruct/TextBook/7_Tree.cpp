@@ -299,6 +299,15 @@ void OrderNonRecursiveTest() {
     cout << endl;
 }
 
+// <数据结构教程>p172 树的相似或等价的判定
+bool Similar(BinTree t1, BinTree t2) {
+    if (t1 == NULL && t2 == NULL)
+        return true;
+    if (t1 && t2 && Similar(t1->lchild, t2->lchild) && Similar(t1->rchild, t2->rchild))
+        return true;
+    return false;
+}
+
 int main() {
     OrderNonRecursiveTest();
 }
