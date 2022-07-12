@@ -225,7 +225,81 @@ void OrderTest() {
     cout << endl;
 }
 
+// <数据结构教程>p165 二叉树的非递归中序遍历
+void InOrderNonRecursive(BinTree t) {
+    BinTree stack[100] = {}, p = t;
+    int top = -1;
+    if (t != NULL) {
+        while (!(p == NULL && top == -1)) {
+            while (p != NULL) { // 首先一路进到左子树的尽头
+                stack[++top] = p;
+                p = p->lchild;
+            }
+            p = stack[top--]; // 取出栈顶
+            cout << p->data << " "; // 栈顶作为没有child的中间节点输出
+            p = p->rchild; // 进入右子树
+        }
+    }
+}
+// <数据结构教程>p167 二叉树的非递归后序遍历
+void PostOrderNonRecursive(BinTree t) {
+    BinTree stack[100] = {}, p = t;
+    int flag_stack[100], flag = 0, top = -1;
+    if (t != NULL) {
+        while (!(p == NULL && top == -1)) {
+            while (p != NULL) { // 首先一路进到左子树的尽头
+                stack[++top] = p;
+                flag_stack[top] = 0;
+                p = p->lchild;
+            }
+            p = stack[top]; // 取出栈顶
+            flag = flag_stack[top--];
+            if (flag == 0) {
+                stack[++top] = p;
+                flag_stack[top] = 1;
+                p = p->rchild;
+            }
+            else
+            {
+                cout << p->data << " ";
+                p = NULL;
+            }
+        }
+    }
+}
+
+// <数据结构教程>p169 二叉树的非递归层次遍历
+void LayerOrder(BinTree t) {
+    if (t == NULL) 
+        return;
+
+    BinTree q[100] = {t}, p=NULL;
+    int front = -1, rear = 0;
+    while (front < rear) {
+        p = q[++front];
+        cout << p->data << " ";
+        if (p->lchild != NULL)
+            q[++rear] = p->lchild;
+        if (p->rchild != NULL)
+            q[++rear] = p->rchild;
+    }
+}
+
+void OrderNonRecursiveTest() {
+    BinTree t = CreateBinTree("A(B(D, E(G)), C(F(, H)))@");
+    PrintTree(t, 4);
+    cout << endl;
+    InOrder(t);
+    cout << endl;
+    InOrderNonRecursive(t);
+    cout << endl;
+    PostOrderNonRecursive(t);
+    cout << endl;
+    LayerOrder(t);
+    cout << endl;
+}
+
 int main() {
-    OrderTest();
+    OrderNonRecursiveTest();
 }
 
