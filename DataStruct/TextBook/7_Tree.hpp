@@ -31,8 +31,16 @@ typedef struct tnode {
 	struct tnode* child, * parent, * brother;
 }TTree;
 
-typedef struct bnode {
+// 二叉树
+typedef struct btnode {
 	datatype data;
-	struct bnode* lchild, * rchild;
-}BinNode, * BinTree;
+	struct btnode* lchild, * rchild;
+}BTNode, * BTree;
+
+// 线索二叉树
+typedef struct tbtnode {
+	datatype data;
+	struct tbtnode* lchild, * rchild;
+	int lbit, rbit;
+}TBTNode, * TBTree;
 

@@ -62,20 +62,20 @@ void PrintTreeNode(char c, int h, int index) {
 	}
 }
 //h为二叉树的高度
-void PrintTree(BinTree T, int h) {
+void PrintTree(BTree T, int h) {
 	printf("\n");
 
 	//二叉树元素序号
 	int index = 0;
 
-	queue<BinTree> Q;
+	queue<BTree> Q;
 
 	//第一个元素先入队
 	Q.push(T);
 
 	//总数大于满二叉树最大值则退出循环
 	while (index < pow(2, h) - 1) {
-		BinNode* node = Q.front();
+		BTNode* node = Q.front();
 		Q.pop();
 		index++;
 		//将空的子树也入队，这样方便计算
@@ -97,8 +97,8 @@ void PrintTree(BinTree T, int h) {
 }
 
 // <数据结构教程>p160 从字符串创建
-BinTree CreateBinTree(string s) {
-	BinTree stack[100] = {}, p = NULL, T = NULL;
+BTree CreateBinTree(string s) {
+	BTree stack[100] = {}, p = NULL, T = NULL;
 	char ch = 0;
 	int flag = 0, top = -1;
 	for (char ch : s)
@@ -120,7 +120,7 @@ BinTree CreateBinTree(string s) {
 			flag = 2;
 			break;
 		default:
-			p = (BinTree)malloc(sizeof(BinNode));
+			p = (BTree)malloc(sizeof(BTNode));
 			p->data = ch;
 			p->lchild = NULL;
 			p->rchild = NULL;
@@ -135,23 +135,23 @@ BinTree CreateBinTree(string s) {
 	}
 }
 void CreateBinTreeTest() {
-	BinTree t = CreateBinTree("A(B(D, E(G)), C(F(, H)))@");
+	BTree t = CreateBinTree("A(B(D, E(G)), C(F(, H)))@");
 	PrintTree(t, 4);
 }
 
 // <数据结构教程>p161 从数组创建树
-BinTree BuildBinTree(int BT[]) {
+BTree BuildBinTree(int BT[]) {
 
-	BinTree T = (BinTree)malloc(sizeof(BinNode));
+	BTree T = (BTree)malloc(sizeof(BTNode));
 	T->data = BT[0];
 	T->lchild = NULL;
 	T->rchild = NULL;
 
-	BinTree PTR[100] = { T };
+	BTree PTR[100] = { T };
 
 	for (int i = 1; i < 100; i++) {
 		if (BT[i] != 0) {
-			PTR[i] = (BinTree)malloc(sizeof(BinNode));
+			PTR[i] = (BTree)malloc(sizeof(BTNode));
 			T->data = BT[i];
 			T->lchild = NULL;
 			T->rchild = NULL;
@@ -167,7 +167,7 @@ BinTree BuildBinTree(int BT[]) {
 }
 
 // <数据结构教程>p162 递归求二叉树叶节点数目
-int CountLeaf(BinTree t) {
+int CountLeaf(BTree t) {
 	if (t == NULL)
 		return 0;
 	if (t->lchild == NULL && t->rchild == NULL)
@@ -176,7 +176,7 @@ int CountLeaf(BinTree t) {
 }
 
 // <数据结构教程>p162 递归求二叉树深度
-int BinTreeDepth(BinTree t) {
+int BinTreeDepth(BTree t) {
 	int leftdep = 0, rightdep = 0;
 	if (t == NULL)
 		return 0;
@@ -193,7 +193,7 @@ int BinTreeDepth(BinTree t) {
 
 // <数据结构教程>p163 二叉树的三种递归遍历方式
 // 前序
-void PreOrder(BinTree t) {
+void PreOrder(BTree t) {
 	if (t != NULL) {
 		cout << t->data << " ";
 		PreOrder(t->lchild);
@@ -201,7 +201,7 @@ void PreOrder(BinTree t) {
 	}
 }
 // 中序
-void InOrder(BinTree t) {
+void InOrder(BTree t) {
 	if (t != NULL) {
 		InOrder(t->lchild);
 		cout << t->data << " ";
@@ -209,7 +209,7 @@ void InOrder(BinTree t) {
 	}
 }
 // 后序
-void PostOrder(BinTree t) {
+void PostOrder(BTree t) {
 	if (t != NULL) {
 		PostOrder(t->lchild);
 		PostOrder(t->rchild);
@@ -217,7 +217,7 @@ void PostOrder(BinTree t) {
 	}
 }
 void OrderTest() {
-	BinTree t = CreateBinTree("A(B(D, E(G)), C(F(, H)))@");
+	BTree t = CreateBinTree("A(B(D, E(G)), C(F(, H)))@");
 	PrintTree(t, 4);
 	cout << endl;
 	PreOrder(t);
@@ -229,8 +229,8 @@ void OrderTest() {
 }
 
 // <数据结构教程>p165 二叉树的非递归中序遍历
-void InOrderNonRecursive(BinTree t) {
-	BinTree stack[100] = {}, p = t;
+void InOrderNonRecursive(BTree t) {
+	BTree stack[100] = {}, p = t;
 	int top = -1;
 	if (t != NULL) {
 		while (!(p == NULL && top == -1)) {
@@ -245,8 +245,8 @@ void InOrderNonRecursive(BinTree t) {
 	}
 }
 // <数据结构教程>p167 二叉树的非递归后序遍历
-void PostOrderNonRecursive(BinTree t) {
-	BinTree stack[100] = {}, p = t;
+void PostOrderNonRecursive(BTree t) {
+	BTree stack[100] = {}, p = t;
 	int flag_stack[100], flag = 0, top = -1;
 	if (t != NULL) {
 		while (!(p == NULL && top == -1)) {
@@ -272,11 +272,11 @@ void PostOrderNonRecursive(BinTree t) {
 }
 
 // <数据结构教程>p169 二叉树的非递归层次遍历
-void LayerOrder(BinTree t) {
+void LayerOrder(BTree t) {
 	if (t == NULL)
 		return;
 
-	BinTree q[100] = { t }, p = NULL;
+	BTree q[100] = { t }, p = NULL;
 	int front = -1, rear = 0;
 	while (front < rear) {
 		p = q[++front];
@@ -289,7 +289,7 @@ void LayerOrder(BinTree t) {
 }
 
 void OrderNonRecursiveTest() {
-	BinTree t = CreateBinTree("A(B(D, E(G)), C(F(, H)))@");
+	BTree t = CreateBinTree("A(B(D, E(G)), C(F(, H)))@");
 	PrintTree(t, 4);
 	cout << endl;
 	InOrder(t);
@@ -303,7 +303,7 @@ void OrderNonRecursiveTest() {
 }
 
 // <数据结构教程>p172 树的相似或等价的判定
-bool Similar(BinTree t1, BinTree t2) {
+bool Similar(BTree t1, BTree t2) {
 	if (t1 == NULL && t2 == NULL)
 		return true;
 	if (t1 && t2 && Similar(t1->lchild, t2->lchild) && Similar(t1->rchild, t2->rchild))
@@ -314,7 +314,7 @@ bool Similar(BinTree t1, BinTree t2) {
 // <数据结构教程>p174 遍历对二叉树的一系列操作
 namespace walkbt {
 	// 1.创建
-	void BuildBT(BinTree& t, queue<char>& q) {
+	void BuildBT(BTree& t, queue<char>& q) {
 		if (q.empty())
 			return;
 
@@ -325,36 +325,36 @@ namespace walkbt {
 			t = NULL;
 		else
 		{
-			t = (BinTree)malloc(sizeof(BinNode));
+			t = (BTree)malloc(sizeof(BTNode));
 			t->data = ch;
 			BuildBT(t->lchild, q);
 			BuildBT(t->rchild, q);
 		}
 	}
 	// 2.销毁
-	void DestoryBT(BinTree t) {
+	void DestoryBT(BTree t) {
 		if (t != NULL) {
 			DestoryBT(t->lchild);
 			DestoryBT(t->rchild);
 			free(t);
 		}
 	}
-	void ClearBT(BinTree& t) {
+	void ClearBT(BTree& t) {
 		DestoryBT(t);
 		t = NULL;
 	}
 	// 3.复制
-	BinTree CopyBT(BinTree t1) {
+	BTree CopyBT(BTree t1) {
 		if (t1 == NULL)
 			return NULL;
-		BinTree t2 = (BinTree)malloc(sizeof(BinNode));
+		BTree t2 = (BTree)malloc(sizeof(BTNode));
 		t2->data = t1->data;
 		t2->lchild = CopyBT(t1->lchild);
 		t2->rchild = CopyBT(t1->rchild);
 		return t2;
 	}
 	// 4.等价
-	bool EqualBT(BinTree t1, BinTree t2) {
+	bool EqualBT(BTree t1, BTree t2) {
 		if (t1 == NULL && t2 == NULL)
 			return true;
 		if (t1 && t2
@@ -366,8 +366,8 @@ namespace walkbt {
 		return false;
 	}
 	// 5.深度(非递归)
-	int DepthBT(BinTree t) {
-		BinTree stack1[100] = {}, p = t;
+	int DepthBT(BTree t) {
+		BTree stack1[100] = {}, p = t;
 		int stack2[100] = {};
 		int curdepth = 1, maxdepth = 0, top = -1;
 		if (t == NULL)
@@ -390,8 +390,8 @@ namespace walkbt {
 		return maxdepth;
 	}
 	// 6.层次(非递归)
-	int LayerBT(BinTree t, int item) {
-		BinTree stack1[100] = {}, p = t;
+	int LayerBT(BTree t, int item) {
+		BTree stack1[100] = {}, p = t;
 		int stack2[100] = {}, flag = 0, top = -1;
 		while (!(p == NULL && top == -1)) {
 			while (p != NULL) {
@@ -416,8 +416,8 @@ namespace walkbt {
 
 	}
 	// 7.删除(非递归)
-	BinTree DeleteBT(BinTree& t, int item) {
-		BinTree stack[100] = {}, q = NULL, p = t;
+	BTree DeleteBT(BTree& t, int item) {
+		BTree stack[100] = {}, q = NULL, p = t;
 		int top = -1;
 		if (t->data == item) {
 			DestoryBT(t);
@@ -443,10 +443,10 @@ namespace walkbt {
 		}
 	}
 	// 8.交换(翻转二叉树)
-	void ExchangeBT(BinTree t) {
+	void ExchangeBT(BTree t) {
 		if (t == NULL)
 			return;
-		BinTree queue[100] = { t }, temp = NULL, p = t;
+		BTree queue[100] = { t }, temp = NULL, p = t;
 		int front = -1, rear = 0;
 		while (front < rear) {
 			p = queue[++front];
@@ -461,13 +461,73 @@ namespace walkbt {
 	}
 
 	void BTTest() {
-		BinTree t = NULL;
+		BTree t = NULL;
 		queue<char> q;
 		for (char item : "ABC  DE  F  G   ")
 			q.push(item);
 		BuildBT(t, q);
 		PrintTree(t, DepthBT(t));
 	}
+}
+
+// <数据结构教程>p182 中序线索二叉树的指定节点求直接前驱节点
+TBTree InPrior(TBTree x) {
+	TBTree s;
+	s = x->lchild;
+	// 当lbit==0的时候说明是s的直接前驱节点
+	if (x->lbit == 1)
+		// 不断找右子树, 当rbit==0的时候说明是s的直接前驱节点(绕了一圈?)
+		while (s->rbit == 1)
+			s = s->rchild;
+	return s;
+}
+
+// <数据结构教程>p182 中序线索二叉树的指定节点求直接后继节点
+TBTree InSucc(TBTree x) {
+	TBTree s;
+	s = x->rchild;
+	// 当lbit==0的时候说明是s的直接前驱节点
+	if (x->rbit == 1)
+		// 不断找右子树, 当rbit==0的时候说明是s的直接前驱节点(绕了一圈?)
+		while (s->lbit == 1)
+			s = s->lchild;
+	return s;
+}
+
+// <数据结构教程>p182 利用线索二叉树遍历二叉树
+void TinOrder(TBTree head) {
+	TBTree p = head;
+	while (true) {
+		p = InSucc(p);
+		if (p == head)
+			break;
+		cout << p->data << " ";
+	}
+}
+
+// TODO 略过了线索二叉树的建立/更新 
+
+// <数据结构教程>p187 二叉排序树的建立(非递归)
+BTree SortTree(int k[], int n);
+void InsertBST1(BTree& T, int item);
+
+// <数据结构教程>p188 二叉排序树的建立(递归)
+void InsertBST2(BTree& T, int item);
+
+// <数据结构教程>p190 二叉排序树的删除
+void DeleteBST(BTree& t, BTree p, BTree q);
+
+// <数据结构教程>p191 二叉排序树的查找(非递归)
+BTree SearchBST1(BTree t, int item);
+
+// <数据结构教程>p192 二叉排序树的查找(递归)
+BTree SearchBST2(BTree t, int item);
+
+// TODO 略过了平衡二叉树
+
+// <数据结构教程>p202 哈夫曼编码
+void HuffCode(int w[100], int weight[], int parent[], int lchild[], int start[], int code[][100], int n, int m) {
+
 }
 
 int main() {
