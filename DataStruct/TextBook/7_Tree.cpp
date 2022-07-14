@@ -366,13 +366,99 @@ namespace walkbt {
 		return false;
 	}
 	// 5.深度(非递归)
-	int DepthBT(BinTree t);
-	// 6.层次
-	int LayerBT(BinTree t, int item);
-	// 7.删除
-	int DeleteBT(BinTree t, int item);
-	// 8.交换
-	int ExchangeBT(BinTree t);
+	int DepthBT(BinTree t) {
+		BinTree stack1[100] = {}, p = t;
+		int stack2[100] = {};
+		int curdepth = 1, maxdepth = 0, top = -1;
+		if (t == NULL)
+			return maxdepth;
+		while (!(p == NULL && top == -1)) {
+			while (p != NULL) {
+				stack1[++top] = p;
+				stack2[top] = curdepth;
+				p = p->lchild;
+				curdepth++;
+			}
+			p = stack1[top];
+			curdepth = stack2[top--];
+			if (p->lchild == NULL && p->rchild == NULL)
+				if (curdepth > maxdepth)
+					maxdepth = curdepth;
+			p = p->rchild;
+			curdepth++;
+		}
+		return maxdepth;
+	}
+	// 6.层次(非递归)
+	int LayerBT(BinTree t, int item) {
+		BinTree stack1[100] = {}, p = t;
+		int stack2[100] = {}, flag = 0, top = -1;
+		while (!(p == NULL && top == -1)) {
+			while (p != NULL) {
+				stack1[++top] = p;
+				stack2[top] = 0;
+				p = p->lchild;
+			}
+			p = stack1[top];
+			flag = stack2[top--];
+			if (flag == 0) { // 后序遍历, 左右中
+				stack1[++top] = p;
+				stack2[top] = 1;
+				p = p->rchild;
+			}
+			else
+			{
+				if (p->data == item)
+					return top + 2;
+				p = NULL;
+			}
+		}
+
+	}
+	// 7.删除(非递归)
+	BinTree DeleteBT(BinTree& t, int item) {
+		BinTree stack[100] = {}, q = NULL, p = t;
+		int top = -1;
+		if (t->data == item) {
+			DestoryBT(t);
+			return NULL;
+		}
+		while (!(p == NULL && top == -1)) {
+			while (p != NULL) {
+				if (p->data == item) {
+					if (q->lchild == p)
+						q->lchild = NULL;
+					else
+						q->rchild = NULL;
+					DestoryBT(p);
+					return t;
+				}
+				stack[++top] = p;
+				q = p;
+				p = p->lchild;
+			}
+			p = stack[top--];
+			q = p;
+			p = p->rchild;
+		}
+	}
+	// 8.交换(翻转二叉树)
+	void ExchangeBT(BinTree t) {
+		if (t == NULL)
+			return;
+		BinTree queue[100] = { t }, temp = NULL, p = t;
+		int front = -1, rear = 0;
+		while (front < rear) {
+			p = queue[++front];
+			temp = p->lchild;
+			p->lchild = p->rchild;
+			p->rchild = temp;
+			if (p->lchild != NULL)
+				queue[++rear] = p->lchild;
+			if (p->rchild != NULL)
+				queue[++rear] = p->rchild;
+		}
+	}
 
 	void BTTest() {
 		BinTree t = NULL;
@@ -380,7 +466,7 @@ namespace walkbt {
 		for (char item : "ABC  DE  F  G   ")
 			q.push(item);
 		BuildBT(t, q);
-		PrintTree(t, 4);
+		PrintTree(t, DepthBT(t));
 	}
 }
 
