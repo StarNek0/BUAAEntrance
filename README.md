@@ -1,4 +1,4 @@
-# BUAA
+# BUAAEntrance
 
 ### 初试/991软件工程基础综合
 

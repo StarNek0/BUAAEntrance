@@ -42,7 +42,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{b6543a96-0a34-4d5e-8352-27c5998001e6}</ProjectGuid>
-    <RootNamespace>BUAA</RootNamespace>
+    <RootNamespace>BUAAEntrance</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>BUAAEntrance</ProjectName>
   </PropertyGroup>
