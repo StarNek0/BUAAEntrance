@@ -505,7 +505,7 @@ void TinOrder(TBTree head) {
 	}
 }
 
-// TODO 略过了线索二叉树的建立/更新 
+// TODO: 略过了线索二叉树的建立/更新 
 
 // <数据结构教程>p187 二叉排序树的建立(非递归)
 BTree SortTree(int k[], int n) {
@@ -523,8 +523,7 @@ void InsertBST1(BTree& t, int item) {
 
 	if (t == NULL)
 		t = newptr;
-	else
-	{
+	else {
 		BTree q = t;
 		while (true)
 			if (item < q->data)
@@ -561,8 +560,45 @@ void InsertBST2(BTree& t, int item) {
 			InsertBST2(t->rchild, item);
 }
 
-// <数据结构教程>p190 二叉排序树的删除
-void DeleteBST(BTree& t, BTree p, BTree q);
+// <数据结构教程>p190 二叉排序树的删除 要删除的节点是p, 其双亲节点是q
+void DeleteBST(BTree& t, BTree p, BTree q) {
+	if (p->lchild == NULL) {
+		if (p == t)
+			t = p->rchild;
+		else if (p == q->lchild) // 要判断一下子节点是双亲节点的left还是right
+			q->lchild = p->rchild;
+		else
+			q->rchild = p->rchild;
+	}
+	else if (p->rchild == NULL) {
+		if (p == t)
+			t = p->lchild;
+		else if (p == q->lchild)
+			q->lchild = p->lchild;
+		else
+			q->rchild = p->lchild;
+	}
+	else {
+		BTree s = p, r = s->rchild;
+		while (r->lchild != NULL) {
+			s = r;
+			r = r->lchild;
+		}
+		r->lchild = p->lchild;
+		if (s != p) {
+			s->lchild = r->rchild;
+			r->rchild = p->rchild;
+		}
+		if (p == t)
+			t = r;
+		else {
+			if (p == q->lchild)
+				q->lchild = r;
+			else
+				q->rchild = r;
+		}
+	}
+}
 
 // <数据结构教程>p191 二叉排序树的查找(非递归)
 BTree SearchBST1(BTree t, int item) {
@@ -590,9 +626,9 @@ BTree SearchBST2(BTree t, int item) {
 		return SearchBST2(t->rchild, item);
 }
 
-// TODO 略过了平衡二叉树
+// TODO: 略过了平衡二叉树
 
-// <数据结构教程>p202 哈夫曼编码
+// TODO: <数据结构教程>p202 哈夫曼编码
 void HuffCode(int w[100], int weight[], int parent[], int lchild[], int start[], int code[][100], int n, int m) {
 
 }
