@@ -508,20 +508,87 @@ void TinOrder(TBTree head) {
 // TODO 略过了线索二叉树的建立/更新 
 
 // <数据结构教程>p187 二叉排序树的建立(非递归)
-BTree SortTree(int k[], int n);
-void InsertBST1(BTree& T, int item);
+BTree SortTree(int k[], int n) {
+	BTree t = NULL;
+	if (n > 0)
+		for (int i = 0; i < n; i++)
+			InsertBST1(t, k[i]);
+	return t;
+}
+void InsertBST1(BTree& t, int item) {
+	BTree newptr = (BTree)malloc(sizeof(BTNode));
+	newptr->data = item;
+	newptr->lchild = NULL;
+	newptr->rchild = NULL;
+
+	if (t == NULL)
+		t = newptr;
+	else
+	{
+		BTree q = t;
+		while (true)
+			if (item < q->data)
+				if (q->lchild = NULL) {
+					q->lchild = newptr;
+					break;
+				}
+				else
+					q = q->lchild;
+			else
+			{
+				if (q->rchild == NULL) {
+					q->rchild = newptr;
+					break;
+				}
+				else
+					q = q->rchild;
+			}
+	}
+}
 
 // <数据结构教程>p188 二叉排序树的建立(递归)
-void InsertBST2(BTree& T, int item);
+void InsertBST2(BTree& t, int item) {
+	if (t == NULL) {
+		t = (BTree)malloc(sizeof(BTNode));
+		t->data = item;
+		t->lchild = NULL;
+		t->rchild = NULL;
+	}
+	else
+		if (item < t->data)
+			InsertBST2(t->lchild, item);
+		else
+			InsertBST2(t->rchild, item);
+}
 
 // <数据结构教程>p190 二叉排序树的删除
 void DeleteBST(BTree& t, BTree p, BTree q);
 
 // <数据结构教程>p191 二叉排序树的查找(非递归)
-BTree SearchBST1(BTree t, int item);
+BTree SearchBST1(BTree t, int item) {
+	BTree p = t;
+	while (p != NULL) {
+		if (p->data == item)
+			return p;
+		if (item < p->data)
+			p = p->lchild;
+		else
+			p = p->rchild;
+	}
+	return NULL;
+}
 
 // <数据结构教程>p192 二叉排序树的查找(递归)
-BTree SearchBST2(BTree t, int item);
+BTree SearchBST2(BTree t, int item) {
+	if (t == NULL)
+		return NULL;
+	if (t->data == item)
+		return t;
+	if (item < t->data)
+		return SearchBST2(t->lchild, item);
+	else
+		return SearchBST2(t->rchild, item);
+}
 
 // TODO 略过了平衡二叉树
 
