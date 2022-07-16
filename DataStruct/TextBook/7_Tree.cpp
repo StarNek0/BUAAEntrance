@@ -633,7 +633,7 @@ void HuffCode(int w[100], int weight[], int parent[], int lchild[], int start[],
 
 }
 
-int main() {
-	walkbt::BTTest();
-}
+//int main() {
+//	walkbt::BTTest();
+//}
 
