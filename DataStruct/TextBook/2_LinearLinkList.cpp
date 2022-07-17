@@ -143,7 +143,7 @@ LinkList Create(int n) {
 	LinkList newptr = NULL, left = NULL, right = NULL;
 	ElemType a;
 	for (int i = 0; i < n; i++) {
-		scanf_s("%d", &a);
+        cin >> a;
 		newptr = (LinkList)malloc(sizeof(LinkNode));
 		newptr->data = a;
 		newptr->next = NULL;

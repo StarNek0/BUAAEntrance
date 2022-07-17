@@ -9,6 +9,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="王道数据结构">
+      <UniqueIdentifier>{e562b938-17fb-42d5-b693-660ae22eba34}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
@@ -39,6 +42,9 @@
     <ClCompile Include="DataStruct\TextBook\8_Graph.cpp">
       <Filter>数据结构教程</Filter>
     </ClCompile>
+    <ClCompile Include="DataStruct\CSKaoYan\Graph.cpp">
+      <Filter>王道数据结构</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataStruct\TextBook\2_LinearLinkList.hpp">
@@ -58,6 +64,9 @@
     </ClInclude>
     <ClInclude Include="DataStruct\TextBook\8_Graph.hpp">
       <Filter>数据结构教程</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStruct\CSKaoYan\CSKaoyan.hpp">
+      <Filter>王道数据结构</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

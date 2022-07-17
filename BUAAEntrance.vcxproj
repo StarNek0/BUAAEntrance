@@ -24,6 +24,7 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DataStruct\CSKaoYan\Graph.cpp" />
     <ClCompile Include="DataStruct\TextBook\2_LinearLinkList.cpp" />
     <ClCompile Include="DataStruct\TextBook\2_LinearList.cpp" />
     <ClCompile Include="DataStruct\TextBook\3_Array.cpp" />
@@ -33,6 +34,7 @@
     <ClCompile Include="DataStruct\TextBook\8_Graph.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DataStruct\CSKaoYan\CSKaoyan.hpp" />
     <ClInclude Include="DataStruct\TextBook\2_LinearLinkList.hpp" />
     <ClInclude Include="DataStruct\TextBook\3_Array.hpp" />
     <ClInclude Include="DataStruct\TextBook\4_Queue.hpp" />

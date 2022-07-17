@@ -1,5 +1,4 @@
 ﻿#include "7_Tree.hpp"
-#include<queue>
 
 //打印每个元素
 void PrintTreeNode(char c, int h, int index) {

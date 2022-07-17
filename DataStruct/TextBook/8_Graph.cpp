@@ -6,10 +6,10 @@ void AdjMatrix(int A[][MaxVNum], int n, int e) {
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < n; j++)
 			A[i][j] = MaxValue;
-	int i, j, weight;
+	int i, j, weight = 1;
 	// 输入每条边
 	for (int k = 0; k < e; k++) {
-		cin >> i >> j >> weight;
+		cin >> i >> j; // >> weight;
 		A[i][j] = weight;
 		A[j][i] = weight;
 	}
@@ -164,6 +164,6 @@ void DelVerTest() {
 
 // 这一部分样例代码完整度太差, 缺胳膊少腿, 近似于伪代码, 因此略过, 转王道
 
-int main() {
-	DelVerTest();
-}
+//int main() {
+//	DelVerTest();
+//}

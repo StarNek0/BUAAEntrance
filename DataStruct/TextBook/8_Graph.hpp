@@ -7,7 +7,7 @@
 
 using namespace std;
 
-const int MaxValue = INT_MAX;
+const int MaxValue = INT32_MAX;
 const int MaxVNum = 100;
 
 /*
