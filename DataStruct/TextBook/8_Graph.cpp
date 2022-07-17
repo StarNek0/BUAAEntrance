@@ -162,6 +162,7 @@ void DelVerTest() {
 	PrintVer(G, 5);
 }
 
+// 这一部分样例代码完整度太差, 缺胳膊少腿, 近似于伪代码, 因此略过, 转王道
 
 int main() {
 	DelVerTest();
