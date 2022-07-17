@@ -133,6 +133,7 @@ BTree CreateBinTree(string s) {
 			break;
 		}
 	}
+	return NULL;
 }
 void CreateBinTreeTest() {
 	BTree t = CreateBinTree("A(B(D, E(G)), C(F(, H)))@");
@@ -413,7 +414,7 @@ namespace walkbt {
 				p = NULL;
 			}
 		}
-
+		return -1;
 	}
 	// 7.删除(非递归)
 	BTree DeleteBT(BTree& t, int item) {
@@ -508,13 +509,6 @@ void TinOrder(TBTree head) {
 // TODO: 略过了线索二叉树的建立/更新 
 
 // <数据结构教程>p187 二叉排序树的建立(非递归)
-BTree SortTree(int k[], int n) {
-	BTree t = NULL;
-	if (n > 0)
-		for (int i = 0; i < n; i++)
-			InsertBST1(t, k[i]);
-	return t;
-}
 void InsertBST1(BTree& t, int item) {
 	BTree newptr = (BTree)malloc(sizeof(BTNode));
 	newptr->data = item;
@@ -543,6 +537,13 @@ void InsertBST1(BTree& t, int item) {
 					q = q->rchild;
 			}
 	}
+}
+BTree SortTree(int k[], int n) {
+	BTree t = NULL;
+	if (n > 0)
+		for (int i = 0; i < n; i++)
+			InsertBST1(t, k[i]);
+	return t;
 }
 
 // <数据结构教程>p188 二叉排序树的建立(递归)
