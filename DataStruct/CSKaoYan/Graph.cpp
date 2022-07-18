@@ -106,7 +106,7 @@ void BFS(MGraph G, int v, bool visited[], queue<int>& q) {
 		q.pop();
 		for (int i = 0; i < G.vexnum; i++) {
 			// v: 当前顶点 i: 目标顶点
-			if (G.Edge[v][i] == true)
+			if (G.Edge[v][i] > 0)
 				if (!visited[i]) {
 					cout << G.Vex[i] << " ";
 					visited[i] = true;
