@@ -236,5 +236,5 @@ void TopologicalSortTest() {
 }
 
 int main() {
-	TopologiicalSortTest();
+	TopologicalSortTest();
 }
