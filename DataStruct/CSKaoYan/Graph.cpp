@@ -195,6 +195,46 @@ void DFSTraverse(MGraph G, int v) {
 			DFS(G, i, visited);
 }
 
+// 拓扑排序
+void TopologicalSort(ALGraph G, int indegree[], int out[]) {
+	stack<int> s;
+	for (int i = 0; i < G.vexnum; i++)
+		if (indegree[i] == 0)
+			s.push(i);
+	int count = 0;
+	while (!s.empty()) {
+		int i = s.top();
+		s.pop();
+		out[count++] = i;
+		for (ArcNode* p = G.vertices[i].first; p; p = p->next)
+		{
+			int v = p->adjvex;
+			if (!(--indegree[v]))
+				s.push(v);// 入度为0则入栈
+		}
+	}
+}
+void TopologicalSortTest() {
+	/*
+	0 1
+	0 3
+	1 2
+	1 3
+	2 4
+	3 2
+	3 4
+	*/
+	ALGraph G = NewALGraph(5, 7);
+	PrintGraph(G);
+	int indegree[] = { 0, 1, 2, 2, 2 };
+	int out[5];
+	TopologicalSort(G, indegree, out);
+	for (int i = 0; i < G.vexnum; i++)
+	{
+		cout << out[i] + 1 << " ";
+	}
+}
+
 int main() {
-	BFSTraverseTest();
+	TopologiicalSortTest();
 }
