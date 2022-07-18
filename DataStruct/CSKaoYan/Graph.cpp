@@ -174,6 +174,27 @@ void BFSMinDistance(ALGraph G, int u) {
 
 }
 
+// 图的邻接矩阵存储结构下的深搜
+void DFS(MGraph G, int v, bool visited[]) {
+	cout << G.Vex[v] << " ";
+	visited[v] = true;
+	for (int i = 0; i < G.vexnum; i++) {
+		// v: 当前顶点 i: 目标顶点
+		if (G.Edge[v][i] == true)
+			if (!visited[i])
+				DFS(G, i, visited);
+	}
+}
+void DFSTraverse(MGraph G, int v) {
+	bool visited[MaxVertexNum] = {};
+	for (int i = 0; i < G.vexnum; i++)
+		visited[i] = false;
+
+	for (int i = 0; i < G.vexnum; i++)
+		if (!visited[i])
+			DFS(G, i, visited);
+}
+
 int main() {
 	BFSTraverseTest();
 }
