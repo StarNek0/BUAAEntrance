@@ -45,6 +45,9 @@
     <ClCompile Include="DataStruct\CSKaoYan\Graph.cpp">
       <Filter>王道数据结构</Filter>
     </ClCompile>
+    <ClCompile Include="DataStruct\CSKaoYan\Sort.cpp">
+      <Filter>王道数据结构</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataStruct\TextBook\2_LinearLinkList.hpp">
