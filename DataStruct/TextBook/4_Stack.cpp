@@ -23,7 +23,7 @@ namespace ArrayStack {
 	bool Push(ElemType stack[], int& top, ElemType item) {
 		if (IsFull(top))
 			return false;
-		stack[top++] = item;
+		stack[++top] = item;
 		return true;
 	}
 	bool Pop(ElemType stack[], int& top, ElemType& item) {
