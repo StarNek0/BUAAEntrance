@@ -37,8 +37,17 @@ void InsertSortMid(int A[], int n) {
 	}
 }
 
-// TODO: 希尔排序
-void ShellSort(int A[], int n) {}
+// 希尔排序
+void ShellSort(int A[], int n) {
+	for (int dk = n / 2; dk > 0; dk /= 2)
+		for (int i = dk; i < n; i++)
+			for (int j = i - dk; j >= 0 && A[j] > A[j + dk]; j -= dk)
+			{
+				int temp = A[j];
+				A[j] = A[j + dk];
+				A[j + dk] = temp;
+			}
+}
 
 // 冒泡排序
 void BubbleSort(int A[], int n) {
@@ -60,8 +69,26 @@ void BubbleSort(int A[], int n) {
 }
 
 // 快速排序
-void QuickSort(int A[], int low, int high) {}
-int Partition(int A[], int low, int high);
+int Partition(int A[], int low, int high) {
+	int pivot = A[low];
+	while (low < high) {
+		while (low < high && A[high] >= pivot)
+			high--; // 将比pivot小的元素移动到左端
+		A[low] = A[high];
+		while (low < high && A[low] <= pivot)
+			low++;// 将比pivot大的元素移动到右端
+		A[high] = A[low];
+	}
+	A[low] = pivot;
+	return low;
+}
+void QuickSort(int A[], int low, int high) {
+	if (low < high) {
+		int mid = Partition(A, low, high);
+		QuickSort(A, low, mid);
+		QuickSort(A, mid + 1, high);
+	}
+}
 
 // 选择排序
 void SelectSort_(int A[], int n) {
@@ -83,7 +110,7 @@ void SelectSort_(int A[], int n) {
 void HeadAdjust(int A[], int k, int len) {
 	A[0] = A[k]; // 暂存子树的根节点(0位置不存储元素)
 	for (int i = 2 * k; i <= len; i *= 2) { // 沿key较大的子节点向下筛选
-		if (i < len && A[i] < A[i + 1])
+		if (i < len&& A[i] < A[i + 1])
 			i++; // 取key较大的子节点的下标
 		if (A[0] >= A[i])
 			break;// 筛选结束
@@ -103,7 +130,7 @@ void HeapSort(int A[], int len) {
 	BuildMaxHeap(A, len); // 初始建大根堆
 
 	// 用堆实现排序(堆的数组表示法 ==> 排好序的结果
-	for (int i = len; i >1; i--)
+	for (int i = len; i > 1; i--)
 	{
 		// 输出堆顶元素(和堆底元素做交换, 把最大的丢到数组底部)
 		int tmp = A[i];
@@ -115,8 +142,31 @@ void HeapSort(int A[], int len) {
 }
 
 // 归并排序
-void Merge(int A[], int low, int mid, int high) {}
-void MergeSort(int A[], int low, int high) {}
+void Merge(int A[], int low, int mid, int high) {
+	int* B = (int*)malloc((high - low + 1) * sizeof(int));
+	if (B == NULL)
+		return;
+	for (int i = low; i <= high; i++)
+		B[i] = A[i];
+	int i, j, k;
+	for (i = low, j = mid + 1, k = low; i <= mid && j <= high; k++)
+		if (B[i] <= B[j])
+			A[k] = B[i++];
+		else
+			A[k] = B[j++];
+	while (i <= mid)
+		A[k++] = B[i++];
+	while (j <= high)
+		A[k++] = B[j++];
+}
+void MergeSort(int A[], int low, int high) {
+	if (low < high) {
+		int mid = (low + high) / 2;
+		MergeSort(A, low, mid);
+		MergeSort(A, mid+1, high);
+		Merge(A, low, mid, high);
+	}
+}
 
 int main() {
 	int A[] = { 5, 4, 1, 3, 2 };
