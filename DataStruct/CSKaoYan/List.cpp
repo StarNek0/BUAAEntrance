@@ -1,5 +1,19 @@
 ﻿#include "CSKaoyan.hpp"
 
+void PrintSqList(SqList* l) {
+	if (l == NULL || l->length == 0)
+		return;
+
+	cout << "[";
+	for (int i = 0; i < l->length; i++)
+	{
+		cout << l->data[i];
+		if (i != l->length - 1)
+			cout << " ";
+	}
+	cout << "]" << endl;
+}
+
 /*
 1．从顺序表中删除具有最小值的元素（假设唯一）并由函数返回被删元素的值。
 空出的位置由最后一个元素填补，若顺序表为空，则显示出错信息并退出运行。
@@ -28,6 +42,28 @@ void DeleteMinTest() {
 	cout << l.length << endl;
 }
 
+/*
+2．设计一个高效算法，将顺序表L的所有元素逆置，要求算法的"空间"复杂度为O(1)。
+*/
+void Reverse(SqList* l) {
+	if (l->length == 0)
+		return;
+	ElemType tmp;
+	for (int i = 0; i < l->length / 2; i++)
+	{
+		tmp = l->data[i];
+		l->data[i] = l->data[l->length - i - 1];
+		l->data[l->length - i - i] = tmp;
+	}
+}
+void ReverseTest() {
+	SqList l = { {3, 1, 2, -1, 5}, 5 };
+	PrintSqList(&l);
+	Reverse(&l);
+	PrintSqList(&l);
+}
+
+
 int main() {
-	DeleteMinTest();
+	ReverseTest();
 }
