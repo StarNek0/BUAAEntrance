@@ -168,11 +168,11 @@ void MergeSort(int A[], int low, int high) {
 	}
 }
 
-int main() {
-	int A[] = { 5, 4, 1, 3, 2 };
-	SelectSort_(A, 5);
-
-	for (int v : A)
-		cout << v << " ";
-	cout << endl;
-}
+//int main() {
+//	int A[] = { 5, 4, 1, 3, 2 };
+//	SelectSort_(A, 5);
+//
+//	for (int v : A)
+//		cout << v << " ";
+//	cout << endl;
+//}

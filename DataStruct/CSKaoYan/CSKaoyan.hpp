@@ -7,6 +7,25 @@
 
 using namespace std;
 
+typedef int ElemType;
+
+// 顺序表
+#define MaxSize 50
+typedef struct {
+	ElemType data[MaxSize];
+	int length;
+} SqList;
+// 单链表
+typedef struct LNode {
+	ElemType data;
+	struct LNode* next;
+} LNode, * LinkList;
+// 双链表
+typedef struct DNode {
+	ElemType data;
+	struct DNode* prior, * next;
+} DNode, * DlinkList;
+
 // 图
 
 // 图的邻接矩阵存储结构定义

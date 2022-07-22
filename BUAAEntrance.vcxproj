@@ -25,6 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DataStruct\CSKaoYan\Graph.cpp" />
+    <ClCompile Include="DataStruct\CSKaoYan\List.cpp" />
     <ClCompile Include="DataStruct\CSKaoYan\Sort.cpp" />
     <ClCompile Include="DataStruct\TextBook\2_LinearLinkList.cpp" />
     <ClCompile Include="DataStruct\TextBook\2_LinearList.cpp" />
