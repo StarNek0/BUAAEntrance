@@ -154,17 +154,68 @@ void DeleteRangeTest() {
 /*
 6．从有序顺序表中删除所有其值重复的元素，使表中所有元素的值均不同。
 */
+void DeleteDuplicateItem(SqList& l) {
+	int k = 0;
+	for (int i = 0; i < l.length - 1;)
+	{
+		int j;
+		for (j = i + 1; j < l.length;)
+			if (l.data[i] == l.data[j])
+				j++;
+			else
+			{
+				l.data[k++] = l.data[i];
+				i = j;
+				break;
+			}
+		if (j == l.length && l.data[k] != l.data[i]) {
+			l.data[k++] = l.data[i];
+			break;
+		}
+
+	}
+	l.length = k;
+}
+void DeleteDuplicateItemTest() {
+	SqList l = { {1, 2, 2, 3, 4, 4}, 6 };
+	PrintSqList(&l);
+	DeleteDuplicateItem(l);
+	PrintSqList(&l);
+}
 
 /*
 7．将两个有序顺序表合并为一个新的有序顺序表，并由函数返回结果顺序表
 */
+SqList MergeSortedList(SqList l1, SqList l2) {
+	SqList l = { {}, l1.length + l2.length };
+	int i = 0, i1 = 0, i2 = 0;
+	while (i1 < l1.length && i2 < l2.length) {
+		if (l1.data[i1] <= l2.data[i2])
+			l.data[i++] = l1.data[i1++];
+		else
+			l.data[i++] = l2.data[i2++];
+	}
+	while (i1 < l1.length)
+		l.data[i++] = l1.data[i1++];
+	while (i2 < l2.length)
+		l.data[i++] = l2.data[i2++];
+	return l;
+}
+void MergeSortedListTest() {
+	SqList l1 = { {1, 2, 2, 3, 4, 4}, 6 };
+	SqList l2 = { {1, 3, 5}, 3 };
+	SqList l = MergeSortedList(l1, l2);
+	PrintSqList(&l);
+}
 
 /*
 8．已知在一维数组A[m +n]中依次存放两个线性表(a1, a2, a3, …, am)和(b1, b2,b3, …, bn)。试编
 写一个函数，将数组中两个顺序表的位置互换，即将(b1, b2, b3, …, bn)放在(a1, a2, a3, …, am)
 的前面。
 */
-
+void ExchangeAB(ElemType A[], int m, int n, int length) {
+	
+}
 /*
 9．线性表(a1, a2, a3, …, an)中的元素递增有序且按顺序存储于计算机内。要求设计一个算法，
 完成用最少时间在表中查找数值为x的元素，若找到，则将其与后继元素位置相交换，
@@ -172,7 +223,5 @@ void DeleteRangeTest() {
 */
 
 int main() {
-	DeleteRangeTest();
-	int i = 0;
-	cout << (++i)+++i;
+	MergeSortedListTest();
 }
