@@ -13,6 +13,19 @@ void PrintSqList(SqList* l) {
 	}
 	cout << "]" << endl;
 }
+void PrintSqList(ElemType A[], int length) {
+	if (length == 0)
+		return;
+
+	cout << "[";
+	for (int i = 0; i < length; i++)
+	{
+		cout << A[i];
+		if (i != length - 1)
+			cout << " ";
+	}
+	cout << "]" << endl;
+}
 
 /*
 1．从顺序表中删除具有最小值的元素（假设唯一）并由函数返回被删元素的值。
@@ -213,15 +226,96 @@ void MergeSortedListTest() {
 写一个函数，将数组中两个顺序表的位置互换，即将(b1, b2, b3, …, bn)放在(a1, a2, a3, …, am)
 的前面。
 */
-void ExchangeAB(ElemType A[], int m, int n, int length) {
-	
+void ReverseA(ElemType A[], int left, int right) {
+	int tmp;
+	while (left < right) {
+		tmp = A[left];
+		A[left] = A[right];
+		A[right] = tmp;
+		left++;
+		right--;
+	}
+}
+void ReverseATest() {
+	ElemType A[] = { 1, 2, 3, 4, 5 };
+	PrintSqList(A, 5);
+	ReverseA(A, 0, 4);
+	PrintSqList(A, 5);
+	ReverseA(A, 0, 2);
+	PrintSqList(A, 5);
+}
+void ExchangeAmn(ElemType A[], int m, int n, int length) {
+	ReverseA(A, 0, m + n - 1);
+	ReverseA(A, 0, n - 1);
+	ReverseA(A, n, m + n - 1);
+}
+void ExchangeAmnTest() {
+	ElemType A[] = { 1, 2, 3, 4, 5 };// a1, a2, a3, b1, b2
+	ExchangeAmn(A, 3, 2, 5);
+	PrintSqList(A, 5);
 }
 /*
 9．线性表(a1, a2, a3, …, an)中的元素递增有序且按顺序存储于计算机内。要求设计一个算法，
 完成用最少时间在表中查找数值为x的元素，若找到，则将其与后继元素位置相交换，
 若找不到，则将其插入表中并使表中元素仍递增有序。
 */
+void Insert9(SqList& l, int index, int x) {
+	for (int i = l.length; i > index; i--)
+		l.data[i] = l.data[i - 1];
+	l.data[index] = x;
+	l.length++;
+}
+void Solve9(SqList& l, int x) {
+	if (x < l.data[0]) {// x小于第一个元素, 头部追加
+		Insert9(l, 0, x);
+	}
+	else if (x > l.data[l.length - 1])
+		l.data[l.length++] = x; // x大于最后一个元素, 尾部追加
+	else if (x == l.data[l.length - 1])
+		return; // x恰好等于最后一个元素, 但没有后继元素, 这是未定义的情况, 直接返回
+	else
+	{
+		// 二分法
+		int left = 0, right = l.length - 1;
+		int mid;
+		while (left <= right) {
+			if (left == right && l.data[left] != x) { // 找到了插入元素的点
+				if (l.data[left] < x) { // 右侧插入
+					Insert9(l, left + 1, x);
+					return;
+				}
+				else // 左侧插入
+				{
+					Insert9(l, left, x);
+					return;
+				}
+			}
+			mid = (left + right) / 2;
+			if (x == l.data[mid]) { // 找到了交换元素的点
+				int tmp = l.data[mid];
+				l.data[mid] = l.data[mid + 1];
+				l.data[mid + 1] = tmp;
+				return;
+			}
+			else if (left == mid) // 如果left与mid相等, 且不等于x, 应该直接让left右移, 而不是用mid赋值, 否则会永远循环
+				left++;
+			else if (x < l.data[mid])
+				right = mid;
+			else
+				left = mid;
+		}
+	}
+}
+void Solve9Test() {
+	SqList l = { {1,3,5,7,10}, 5 };
+	Solve9(l, 11);
+	Solve9(l, 8);
+	Solve9(l, 6);
+	Solve9(l, 4);
+	Solve9(l, 2);
+	PrintSqList(&l);
+}
 
 int main() {
-	MergeSortedListTest();
+	Solve9Test();
 }
