@@ -28,7 +28,7 @@ void PrintSqList(ElemType A[], int length) {
 }
 
 /*
-1．从顺序表中删除具有最小值的元素（假设唯一）并由函数返回被删元素的值。
+1.从顺序表中删除具有最小值的元素（假设唯一）并由函数返回被删元素的值。
 空出的位置由最后一个元素填补，若顺序表为空，则显示出错信息并退出运行。
 */
 ElemType DeleteMin(SqList* l) {
@@ -56,7 +56,7 @@ void DeleteMinTest() {
 }
 
 /*
-2．设计一个高效算法，将顺序表L的所有元素逆置，要求算法的"空间"复杂度为O(1)。
+2.设计一个高效算法，将顺序表L的所有元素逆置，要求算法的"空间"复杂度为O(1)。
 */
 void Reverse(SqList* l) {
 	if (l->length == 0)
@@ -77,7 +77,7 @@ void ReverseTest() {
 }
 
 /*
-3．对长度为n的顺序表L，编写一个时间复杂度为O(n)、空间复杂度为O(1)的算法，该算
+3.对长度为n的顺序表L，编写一个时间复杂度为O(n)、空间复杂度为O(1)的算法，该算
 法删除线性表中所有值为x的数据元素。
 */
 void DeleteItemX(SqList* l, ElemType x) {
@@ -165,7 +165,7 @@ void DeleteRangeTest() {
 }
 
 /*
-6．从有序顺序表中删除所有其值重复的元素，使表中所有元素的值均不同。
+6.从有序顺序表中删除所有其值重复的元素，使表中所有元素的值均不同。
 */
 void DeleteDuplicateItem(SqList& l) {
 	int k = 0;
@@ -197,7 +197,7 @@ void DeleteDuplicateItemTest() {
 }
 
 /*
-7．将两个有序顺序表合并为一个新的有序顺序表，并由函数返回结果顺序表
+7.将两个有序顺序表合并为一个新的有序顺序表，并由函数返回结果顺序表
 */
 SqList MergeSortedList(SqList l1, SqList l2) {
 	SqList l = { {}, l1.length + l2.length };
@@ -222,7 +222,7 @@ void MergeSortedListTest() {
 }
 
 /*
-8．已知在一维数组A[m +n]中依次存放两个线性表(a1, a2, a3, …, am)和(b1, b2,b3, …, bn)。试编
+8.已知在一维数组A[m +n]中依次存放两个线性表(a1, a2, a3, …, am)和(b1, b2,b3, …, bn)。试编
 写一个函数，将数组中两个顺序表的位置互换，即将(b1, b2, b3, …, bn)放在(a1, a2, a3, …, am)
 的前面。
 */
@@ -255,7 +255,7 @@ void ExchangeAmnTest() {
 	PrintSqList(A, 5);
 }
 /*
-9．线性表(a1, a2, a3, …, an)中的元素递增有序且按顺序存储于计算机内。要求设计一个算法，
+9.线性表(a1, a2, a3, …, an)中的元素递增有序且按顺序存储于计算机内。要求设计一个算法，
 完成用最少时间在表中查找数值为x的元素，若找到，则将其与后继元素位置相交换，
 若找不到，则将其插入表中并使表中元素仍递增有序。
 */
@@ -337,17 +337,19 @@ void Print(LinkList list) {
 /*
 1.设计一个递归算法，删除不带头结点的单链表工中所有值为x的结点。
 */
+
 void DeleteX(LinkList& l, ElemType x) {
+	LNode* p;
 	if (l == NULL)
 		return;
-	LinkList p = l;
-	while (p!=NULL && p->next != NULL) {
-		if (p->next->data == x)
-			p->next = p->next->next;
-		p = p->next;
-	}
-	if (l->data == x)
+	if (l->data == x) {
+		p = l;
 		l = l->next;
+		//free(p); // _CrtIsValidHeapPointer 内存不能跨模块分配和释放
+		DeleteX(l, x);
+	}
+	else
+		DeleteX(l->next, x);
 }
 void DeleteXTest() {
 	LNode l3 = { 3, NULL };
@@ -363,6 +365,75 @@ void DeleteXTest() {
 	DeleteX(l, 0);
 	Print(l);
 }
+
+/*
+2.在带头结点的单链表工中，删除所有值为x的结点，并释放其空间，假设值为的结点
+不唯一，试编写算法以实现上述操作。
+*/
+void DeleteX1(LinkList& l, ElemType x) {
+	if (l == NULL)
+		return;
+	LinkList p = l;
+	while (p != NULL && p->next != NULL) {
+		if (p->next->data == x) {
+			LinkList q = p->next;
+			p->next = p->next->next;
+			//free(p); // _CrtIsValidHeapPointer 内存不能跨模块分配和释放
+		}
+
+		p = p->next;
+	}
+}
+
+/*
+3.设L为带头结点的单链表，编写算法实现从尾到头反向输出每个结点的值。
+WARNING: 需要复习
+*/
+void R_Print(LinkList l) {
+	if (l->next != NULL)
+		R_Print(l->next);
+	if (l != NULL)
+		printf("%d ", l->data);
+}
+
+/*
+4.试编写在带头结点的单链表工中删除一个最小值结点的高效算法(假设最小值结点是唯
+一的)。
+WARNING: 需要复习
+*/
+void DeleteLinkMin(LinkList& l) {
+	LinkList pre = l, p = l->next;
+	LinkList minpre = pre, minp = p;
+	while (p != NULL) {
+		if (p->data < minp->data) {
+			minp = p;
+			minpre = pre;
+		}
+		pre = p; p = p->next;
+	}
+	minpre->next = minp->next;
+	//free(minp);
+}
+
+/*
+5.试编写算法将带头结点的单链表就地逆置，所谓“就地”是指辅助空间复杂度为O(1)。
+*/
+void ReverseLink(LinkList& l) {
+	if (l->next == NULL || l->next->next == NULL)
+		return;
+	LinkList pre = l->next, p = pre->next, tmp = NULL;
+	// 令pre是p的前一结点
+	while (p != NULL) {
+		l->next = p; // 头结点指向p
+		pre->next = NULL; // 断开pre和p
+		tmp = p->next; // 保存p的下一结点
+		p->next = pre; // 断开p和下一结点的连接, 转而指向前一节点pre
+
+		pre = p; // 把pre向后移
+		p = tmp; // 把p向后移
+	}
+}
+
 
 int main() {
 	DeleteXTest();
