@@ -316,6 +316,54 @@ void Solve9Test() {
 	PrintSqList(&l);
 }
 
+void Print(LinkList list) {
+	if (list == NULL)
+		return;
+
+	int n = 0;
+	cout << list << ": ";
+	for (LinkList p = list; p != nullptr; p = p->next) {
+		if (p == list && n != 0) {
+			cout << "[FirstNode(" << p->data << ")]" << endl;
+			return;
+		}
+		n++;
+		cout << p->data << " -> ";
+
+	}
+	cout << "NULL" << endl;
+}
+
+/*
+1.设计一个递归算法，删除不带头结点的单链表工中所有值为x的结点。
+*/
+void DeleteX(LinkList& l, ElemType x) {
+	if (l == NULL)
+		return;
+	LinkList p = l;
+	while (p!=NULL && p->next != NULL) {
+		if (p->next->data == x)
+			p->next = p->next->next;
+		p = p->next;
+	}
+	if (l->data == x)
+		l = l->next;
+}
+void DeleteXTest() {
+	LNode l3 = { 3, NULL };
+	LNode l2 = { 2, &l3 };
+	LNode l1 = { 1, &l2 };
+
+	LNode l0 = { 0, &l1 };
+	LinkList l = &l0;
+
+	Print(l);
+	DeleteX(l, 2);
+	DeleteX(l, 3);
+	DeleteX(l, 0);
+	Print(l);
+}
+
 int main() {
-	Solve9Test();
+	DeleteXTest();
 }
