@@ -561,6 +561,146 @@ void SplitLink(LinkList& A, LinkList& B) {
 	B->next = even.next;
 }
 
+/*
+11.设C={a1, b1, a2, b2, …, an, bn}为线性表，采用带头结点的hc单链表存放，设计一个就地
+算法，将其拆分为两个线性表，使得A={a1, a2, …, an}，B= {bn, …, b2, b1}。
+*/
+void SplitLink11(LinkList& hc, LinkList& ha, LinkList& hb) {
+	int i = 0;
+	LinkList p = hc->next;
+	LinkList pa = ha;
+	while (p != NULL) {
+		if ((i++) % 2 == 0) {
+			// A
+			pa->next = p;
+			pa = pa->next;
+			p = p->next;
+		}
+		else
+		{
+			// B
+			LinkList tmp = p->next; // 暂存p的下一结点
+			p->next = hb->next;
+			hb->next = p;
+			p = tmp;
+		}
+	}
+}
+
+/*
+12.在一个递增有序的线性表中，有数值相同的元素存在。若存储方式为单链表，设计算法
+去掉数值相同的元素,使表中不再有重复的元素,例如(7,10,10,21,30,42,42,42,51,70)
+将变为(7,10,21,30,42,51,70)。
+*/
+void UniqueLink(LinkList& l) {
+	LinkList p = l;
+	while (p != NULL && p->next != NULL) {
+		if (p->data == p->next->data)
+			p->next = p->next->next; // q=p.next; free(q); p.next=p.next.next;
+		else
+			p = p->next;
+	}
+}
+
+/*
+13.假设有两个按元素值递增次序排列的线性表，均以单链表形式存储。请编写算法将这两
+个单链表归并为一个按元素值递减次序排列的单链表，并要求利用原来两个单链表的结点存放归并后的单链表。
+*/
+void MergeSortedLink(LinkList& l1, LinkList& l2) {
+	LNode head = { 0, NULL }; // 暂时使用head来存放归并后的链表
+	LinkList p1 = l1, p2 = l2;
+	while (p1 != NULL && p2 != NULL) {
+		if (p1->data <= p2->data) { //将比较小的结点头插法加入到head链表中
+			LinkList next = p1->next; // 暂存后继结点
+			p1->next = head.next;
+			head.next = p1;
+			p1 = next;
+		}
+		else
+		{
+			LinkList next = p2->next; // 暂存后继结点
+			p2->next = head.next;
+			head.next = p2;
+			p2 = next;
+		}
+	}
+	while (p1 != NULL) {
+		LinkList next = p1->next; // 暂存后继结点
+		p1->next = head.next;
+		head.next = p1;
+		p1 = next;
+	}
+	while (p2 != NULL) {
+		LinkList next = p2->next; // 暂存后继结点
+		p2->next = head.next;
+		head.next = p2;
+		p2 = next;
+	}
+	// 将l1和l2指向head指向的链表
+	l1 = head.next;
+	l2 = head.next;
+}
+
+/*
+14.设A和B是两个单链表（带头结点)，其中元素递增有序。设计一个算法从A和B中的
+公共元素产生单链表C，要求不破坏A、B的结点。
+*/
+void FindPublicLink(LinkList ha, LinkList hb, LinkList& hc) {
+	LinkList p1 = ha->next, p2 = hb->next, p3 = hc;
+	while (p1 != NULL && p2 != NULL) {
+		if (p1->data == p2->data) {
+			LinkList newptr = (LinkList)malloc(sizeof(LNode));
+			newptr->next = NULL;
+			newptr->data = p1->data;
+
+			p3->next = newptr;
+			p3 = p3->next;
+			p1 = p1->next;
+			p2 = p2->next;
+		}
+		else {
+			if (p1->data < p2->data)
+				p1 = p1->next;
+			else
+				p2 = p2->next;
+		}
+	}
+}
+
+/*
+15.已知两个链表A和B分别表示两个集合，其元素递增排列。编制函数，求A与B的交
+集，并存放于A链表中。
+*/
+// 跟上一题差不多, 不写了
+
+/*
+16.两个整数序列 A=a1, a2, a3, …, am 和 B=b1, b2, b3, …, bn 已经存入两个单链表中，设计一
+个算法，判断序列B是否是序列A的连续子序列。
+*/
+bool CheckSubLink(LinkList A, LinkList B) {
+	if (A == NULL || B == NULL)
+		return false;
+
+	LinkList pa = A; // A的外层指针, 每一轮对[pa, am]和[b1, bn]作比较
+	while (pa != NULL) {
+		LinkList pa1 = pa; // A的内层指针
+		LinkList pb = B; // B的指针
+		while (pa1->data == pb->data) { // 找到[pa, am]中与b1相同的元素, 然后比较后续是否相同
+			pa1->next = pa1->next;
+			pb->next = pb->next;
+			if (pb == NULL) // B遍历到尾部每一个元素都相同, 说明是子序列
+				return true;
+			if (pa1 == NULL) // A遍历到尾部, 而B没到尾部, 不是子序列
+				goto next;
+		}
+	next:
+		pa = pa->next;
+	}
+	return false;
+}
+
+// TODO: 没写循环链表数据结构, 剩下的放课本习题上去写
+
 int main() {
 	DeleteXTest();
 }
