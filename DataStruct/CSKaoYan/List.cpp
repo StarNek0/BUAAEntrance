@@ -434,6 +434,68 @@ void ReverseLink(LinkList& l) {
 	}
 }
 
+/*
+6.有一个带头结点的单链表L，设计一个算法使其元素递增有序
+*/
+void SortLink(LinkList& l) {
+	queue<LinkList> q;
+	while (l->next != NULL) {
+		LinkList minpre = l, min = l->next;
+		LinkList pre = l, p = l->next;
+		while (p != NULL) {
+			if (p->data < min->data) { // 更新和保存最小值的结点及其前缀
+				minpre = pre;
+				min = p;
+			}
+			pre = pre->next;
+			p = p->next; // 更新链表指针
+		}
+		q.push(min); // 每一趟将最小值加入队列, 最终队列是递增的
+		minpre->next = min->next;
+	}
+
+	// 从队列依次取出头部元素更新到头结点后面
+	LinkList p = l;
+	while (!q.empty()) {
+		p->next = q.front();
+		p = p->next;
+	}
+	p->next = NULL;
+}
+
+/*
+7.设在一个带表头结点的单链表中所有元素结点的数据值无序，试编写一个函数，删除表
+中所有介于给定的两个值（作为函数参数给出)之间的元素的元素（若存在)。
+*/
+void DeleteLinkByRange(LinkList& l, ElemType left, ElemType right) {
+	LinkList pre = l, p = l->next;
+	while (p != NULL) {
+		if (left <= p->data && p->data <= right) {
+			pre->next = p->next;
+			p = pre->next;
+		}
+		else
+		{
+			pre = pre->next;
+			p = p->next;
+		}
+	}
+}
+
+/*
+8.给定两个单链表，编写算法找出两个链表的公共结点。
+*/
+
+/*
+9.给定一个带表头结点的单链表，设head为头指针，结点结构为(data, next)，data
+为整型元素，next为指针，试写出算法:按递增次序输出单链表中各结点的数据元素，
+并释放结点所占的存储空间(要求:不允许使用数组作为辅助空间)。
+*/
+
+/*
+10.将一个带头结点的单链表A分解为两个带头结点的单链表A和B，使得A表中含有原表
+中序号为奇数的元素,而B表中含有原表中序号为偶数的元素，且保持其相对顺序不变。
+*/
 
 int main() {
 	DeleteXTest();
