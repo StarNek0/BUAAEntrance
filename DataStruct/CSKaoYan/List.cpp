@@ -484,18 +484,82 @@ void DeleteLinkByRange(LinkList& l, ElemType left, ElemType right) {
 
 /*
 8.给定两个单链表，编写算法找出两个链表的公共结点。
+WARNING: 需要复习
 */
+LinkList FindPublicNode(LinkList l1, LinkList l2) {
+	// 统计两个链表长度
+	int len1 = 0, len2 = 0;
+	for (LinkList p = l1; p != NULL; p = p->next)
+		len1++;
+	for (LinkList p = l2; p != NULL; p = p->next)
+		len2++;
+
+	// 如果有公共结点, 那么后半段是相同的, 先把两个指针指到离结尾同一个长度上
+	LinkList p1 = l1, p2 = l2;
+	if (len1 > len2) {
+		for (int i = 0; i < len1 - len2; i++)
+			p1 = p1->next;
+	}
+	else {
+		for (int i = 0; i < len2 - len1; i++)
+			p2 = p2->next;
+	}
+	// 然后判断是否相等
+	while (p1 != NULL) {
+		if (p1 == p2)
+			return p1;
+		p1 = p1->next;
+		p2 = p2->next;
+	}
+	return NULL;
+}
 
 /*
 9.给定一个带表头结点的单链表，设head为头指针，结点结构为(data, next)，data
 为整型元素，next为指针，试写出算法:按递增次序输出单链表中各结点的数据元素，
 并释放结点所占的存储空间(要求:不允许使用数组作为辅助空间)。
 */
+void PrintBySort(LinkList& head) {
+	while (head->next != NULL) {
+		LinkList pre = head, p = head->next;
+		LinkList min_pre = head, min_p = head->next;
+		while (p != NULL) {
+			if (p->data < min_p->data) { // 更新和保存最小值的结点及其前缀
+				min_pre = pre;
+				min_p = p;
+			}
+			pre = pre->next;
+			p = p->next; // 更新链表指针
+		}
+		printf("%d ", min_p->data);
+		min_pre->next = min_p->next;
+	}
+}
 
 /*
 10.将一个带头结点的单链表A分解为两个带头结点的单链表A和B，使得A表中含有原表
 中序号为奇数的元素,而B表中含有原表中序号为偶数的元素，且保持其相对顺序不变。
 */
+void SplitLink(LinkList& A, LinkList& B) {
+	LNode odd = { 0, NULL }, even = { 0, NULL };
+	LinkList odd_p = &odd, even_p = &even;
+
+	LinkList p = A->next;
+	while (p != NULL) {
+		if (p->data % 2 == 1) {
+			odd_p->next = p;
+			odd_p = odd_p->next;
+		}
+		else
+		{
+			even_p->next = p;
+			even_p = even_p->next;
+		}
+	}
+
+	A->next = odd.next;
+	B->next = even.next;
+}
 
 int main() {
 	DeleteXTest();
