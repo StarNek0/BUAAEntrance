@@ -51,6 +51,9 @@
     <ClCompile Include="DataStruct\CSKaoYan\List.cpp">
       <Filter>王道数据结构</Filter>
     </ClCompile>
+    <ClCompile Include="DataStruct\CSKaoYan\StackQueueArray.cpp">
+      <Filter>王道数据结构</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataStruct\TextBook\2_LinearLinkList.hpp">
