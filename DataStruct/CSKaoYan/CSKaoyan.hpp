@@ -26,6 +26,29 @@ typedef struct DNode {
 	struct DNode* prior, * next;
 } DNode, * DlinkList;
 
+// 栈
+typedef struct {
+	ElemType data[MaxSize];
+	int top;
+} SqStack;
+typedef struct listack {
+	ElemType data;
+	struct listack* next;
+} *LiStack;
+
+//队列
+typedef struct {
+	ElemType data[MaxSize];
+	int front, rear;
+} SqQueue;
+typedef struct linknode {
+	ElemType data;
+	struct linknode* next;
+}linknode;
+typedef struct {
+	linknode* front, * rear;
+}linkqueue;
+
 // 图
 
 // 图的邻接矩阵存储结构定义
