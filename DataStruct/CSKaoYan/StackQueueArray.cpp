@@ -47,7 +47,7 @@ int DeQueue(SqQueue& Q, ElemType& x) {
 /*
 2. Q是一个队列，S是一个空栈，实现将队列中的元素逆置的算法。
 */
-int Queue3(SqQueue& Q, stack<int>& S) {
+void Queue3(SqQueue& Q, stack<int>& S) {
 	while (Q.front != Q.rear) 
 		S.push(Q.data[Q.front++]);
 	
@@ -56,3 +56,48 @@ int Queue3(SqQueue& Q, stack<int>& S) {
 		S.pop();
 	}
 }
+
+/*
+3．利用两个栈S1,S2来模拟一个队列，已知栈的4个运算定义如下:
+	Push(S, x);//元素x入栈S
+	Pop(S, x);//S出栈并将出栈的值赋给x
+	StackEmpty(S);//判断栈是否为空
+	StackOverflow(S);//判断栈是否满
+如何利用栈的运算来实现该队列的3个运算（形参由读者根据要求自己设计）?
+	Enqueue;//将元素x入队
+	Dequeue;//出队，并将出队元素存储在×中
+	QueueEmpty;//判断队列是否为空
+*/
+/*
+// s1只做入队, s2只出队
+// s2和s1顺序相反, 出队时将s1全部转移到s2, 入队时将s2全部转移回s1
+void Enqueue(int x) {
+	if (StackEmpty(s2))
+		Push(s1, x);
+	else {
+		while(!StackEmpty(s2)){
+			int x;
+			Pop(s2, x);
+			Push(s1, x);
+		}
+		Push(s1, x);
+	}
+}
+void Dequeue(int &x) {
+	if (StackEmpty(s1) && StackEmpty(s2))
+		return;
+	if (StackEmpty(s1))
+		Pop(s2, x);
+	else{
+		while(!StackEmpty(s1)){
+			int x;
+			Pop(s1, x);
+			Push(s2, x);
+		}
+		Pop(s2, x);
+	}
+}
+bool QueueEmpty() {
+	return StackEmpty(s1) && StackEmpty(s2);
+}
+*/
