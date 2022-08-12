@@ -101,3 +101,42 @@ bool QueueEmpty() {
 	return StackEmpty(s1) && StackEmpty(s2);
 }
 */
+
+/*
+1. 假设一个算术表达式中包含圆括号、方括号和花括号3种类型的括号, 编写一个算法来
+判别表达式中的括号是否配对, 以字符“\0”作为算术表达式的结束符。
+*/
+bool ValidBrackets(string data) {
+	stack<char> s;
+	for (char c : data) {
+		if (c == '(' || c == '[' || c == '{')
+			s.push(c);
+		switch (c){
+		case ')':
+			if (s.empty())
+				return false;
+			if (s.top() == '(')
+				s.pop();
+			else
+				return false;
+			break;
+		case ']':
+			if (s.empty())
+				return false;
+			if (s.top() == '[')
+				s.pop();
+			else
+				return false;
+			break;
+		case '}':
+			if (s.empty())
+				return false;
+			if (s.top() == '{')
+				s.pop();
+			else
+				return false;
+			break;
+		}
+	}
+	return true;
+}
