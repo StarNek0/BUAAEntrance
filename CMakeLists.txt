@@ -9,6 +9,9 @@ include_directories(DataStruct/TextBook)
 add_executable(BUAAEntrance
         DataStruct/CSKaoYan/CSKaoyan.hpp
         DataStruct/CSKaoYan/Graph.cpp
+        DataStruct/CSKaoYan/List.cpp
+        DataStruct/CSKaoYan/Sort.cpp
+        DataStruct/CSKaoYan/StackQueueArray.cpp
         DataStruct/TextBook/2_LinearLinkList.cpp
         DataStruct/TextBook/2_LinearLinkList.hpp
         DataStruct/TextBook/2_LinearList.cpp
