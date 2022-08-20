@@ -12,6 +12,9 @@
     <Filter Include="王道数据结构">
       <UniqueIdentifier>{e562b938-17fb-42d5-b693-660ae22eba34}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CCF">
+      <UniqueIdentifier>{db9ec393-8021-41ce-b5cb-1619c32afce7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
