@@ -27,3 +27,4 @@ add_executable(BUAAEntrance
         DataStruct/TextBook/8_Graph.hpp)
 
 add_executable(201312-1 CCF/2013/201312-1.cpp)
+add_executable(201312-2 CCF/2013/201312-2.cpp)
