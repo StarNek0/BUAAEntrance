@@ -29,3 +29,4 @@ add_executable(BUAAEntrance
 add_executable(201312-1 CCF/2013/201312-1.cpp)
 add_executable(201312-2 CCF/2013/201312-2.cpp)
 add_executable(201312-3 CCF/2013/201312-3.cpp)
+add_executable(201403-1 CCF/2014/201403-1.cpp)
